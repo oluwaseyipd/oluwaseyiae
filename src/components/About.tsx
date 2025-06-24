@@ -5,11 +5,30 @@ const About = () => {
   const [activeTab, setActiveTab] = useState("story");
 
   const achievements = [
-    { icon: Code2, label: "Projects Completed", value: "50+", color: "blue" },
-    { icon: Users, label: "Clients Served", value: "15+", color: "indigo" },
-    { icon: Trophy, label: "Years Experience", value: "3+", color: "purple" },
-    { icon: BookOpen, label: "Technologies", value: "12+", color: "teal" }
+    { icon: Code2, label: "Projects Completed", value: "10+", color: "blue" },
+    { icon: Users, label: "Clients Served", value: "3+", color: "indigo" },
+    { icon: Trophy, label: "Years Experience", value: "1+", color: "purple" },
+    { icon: BookOpen, label: "Technologies", value: "10+", color: "teal" }
   ];
+
+const colorClasses = {
+  blue: {
+    gradient: "bg-gradient-to-r from-blue-500 to-blue-600",
+    text: "text-blue-600"
+  },
+  indigo: {
+    gradient: "bg-gradient-to-r from-indigo-500 to-indigo-600",
+    text: "text-indigo-600"
+  },
+  purple: {
+    gradient: "bg-gradient-to-r from-purple-500 to-purple-600",
+    text: "text-purple-600"
+  },
+  teal: {
+    gradient: "bg-gradient-to-r from-teal-500 to-teal-600",
+    text: "text-teal-600"
+  }
+};
 
   const currentFocus = [
     {
@@ -88,7 +107,7 @@ const About = () => {
                   <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 border border-slate-200 shadow-sm">
                     <div className="flex items-center gap-3 mb-4">
                       <MapPin className="w-5 h-5 text-blue-600" />
-                      <span className="text-slate-600 font-medium">Based in Ibadan, Nigeria</span>
+                      <span className="text-slate-600 font-medium">Based in Ogbomoso, Nigeria</span>
                     </div>
                     
                     <p className="text-lg text-slate-700 leading-relaxed mb-6">
@@ -168,21 +187,21 @@ const About = () => {
             {/* Achievements Grid */}
             <div className="grid grid-cols-2 gap-4 mt-5">
               {achievements.map((achievement, index) => (
-                <div 
-                  key={achievement.label}
-                  className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 border border-slate-200 shadow-sm hover:shadow-md transition-all duration-300 text-center group"
-                  style={{animationDelay: `${index * 0.1}s`}}
-                >
-                  <div className={`w-12 h-12 bg-gradient-to-r from-${achievement.color}-500 to-${achievement.color}-600 rounded-xl flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform duration-300`}>
-                    <achievement.icon className="w-6 h-6 text-white" />
-                  </div>
-                  <div className={`text-2xl font-bold text-${achievement.color}-600 mb-1`}>
-                    {achievement.value}
-                  </div>
-                  <div className="text-sm text-slate-600 font-medium">
-                    {achievement.label}
-                  </div>
-                </div>
+               <div
+  key={achievement.label}
+  className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 border border-slate-200 shadow-sm hover:shadow-md transition-all duration-300 text-center group"
+  style={{animationDelay: `${index * 0.1}s`}}
+>
+  <div className={`w-12 h-12 ${colorClasses[achievement.color].gradient} rounded-xl flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform duration-300`}>
+    <achievement.icon className="w-6 h-6 text-white" />
+  </div>
+  <div className={`text-2xl font-bold ${colorClasses[achievement.color].text} mb-1`}>
+    {achievement.value}
+  </div>
+  <div className="text-sm text-slate-600 font-medium">
+    {achievement.label}
+  </div>
+</div>
               ))}
             </div>
             </div>
@@ -215,19 +234,15 @@ const About = () => {
                   
                   {/* Placeholder content */}
                   <div className="text-center p-6">
-                    <div className="w-16 h-16 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300 shadow-lg">
-                      <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
+                    <div className="w-10 h-10 md:w-16 md:h-16 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                      <svg className="w-5 h-5 md:w-8 md:h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
                         <path d="M8 5v10l7-5z"/>
                       </svg>
                     </div>
-                    <h4 className="font-semibold text-slate-900 mb-2">30-Second Introduction</h4>
-                    <p className="text-slate-600 text-sm mb-3">
+                    <h4 className="font-semibold text-[15px] md:text-lg text-slate-900 mb-2">30-Second Introduction</h4>
+                    <p className="text-slate-600 text-[10px] md:text-sm">
                       Get to know me beyond the resume - hear my passion for development and what drives me to create exceptional web experiences.
                     </p>
-                    <div className="inline-flex items-center gap-2 text-blue-600 font-medium text-sm">
-                      <span>Click to watch</span>
-                      <ExternalLink className="w-4 h-4" />
-                    </div>
                   </div>
                   
                   {/* Decorative elements */}
@@ -253,9 +268,9 @@ const About = () => {
                     key={item.title}
                     className="flex gap-4 p-4 bg-slate-50 rounded-xl hover:bg-slate-100 transition-colors duration-300"
                   >
-                    <div className={`w-12 h-12 bg-gradient-to-r from-${item.color}-500 to-${item.color}-600 rounded-lg flex items-center justify-center flex-shrink-0`}>
-                      <item.icon className="w-6 h-6 text-white" />
-                    </div>
+                   <div className={`w-12 h-12 ${colorClasses[item.color].gradient} rounded-lg flex items-center justify-center flex-shrink-0`}>
+  <item.icon className="w-6 h-6 text-white" />
+</div>
                     <div className="flex-1">
                       <div className="flex items-center gap-2 mb-1">
                         <span className="text-sm font-medium text-slate-500">{item.title}</span>
@@ -287,16 +302,18 @@ const About = () => {
         </div>
       </div>
 
-      <style jsx>{`
-        @keyframes fade-in {
-          from { opacity: 0; transform: translateY(20px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .animate-fade-in {
-          animation: fade-in 0.6s ease-out forwards;
-        }
-      `}</style>
+      <style>
+        {`
+          @keyframes fade-in {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+          }
+          
+          .animate-fade-in {
+            animation: fade-in 0.6s ease-out forwards;
+          }
+        `}
+      </style>
     </section>
   );
 };

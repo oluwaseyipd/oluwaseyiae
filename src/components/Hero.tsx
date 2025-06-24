@@ -6,7 +6,7 @@ import heroPicture from "@/img/hero-img.png";
 const Hero = () => {
   const [currentRole, setCurrentRole] = useState(0);
   const roles = ["Frontend Developer", "React Specialist", "UI/UX Enthusiast", "Problem Solver"];
-  const skills = ["React", "TypeScript", "Next.js", "Tailwind", "Node.js", "SQL"];
+  const skills = ["React", "TypeScript", "Tailwind", "Bootstrap", "Node.js"];
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -41,7 +41,7 @@ const Hero = () => {
         <div className="absolute bottom-1/3 left-1/6 text-blue-300/40 font-mono text-sm animate-float" style={{animationDelay: '2s'}}>{'{ }'}</div>
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center">
+      <div className="relative z-10 max-w-7xl mx-auto py-10 md:py-6 px-6 grid lg:grid-cols-2 gap-12 items-center">
         {/* Left Content */}
         <div className="space-y-8">
           <div className="space-y-4">
@@ -111,13 +111,13 @@ const Hero = () => {
 
           {/* Social Links */}
           <div className="flex gap-4 pt-4">
-            <a href="#" className="p-3 bg-white/80 backdrop-blur-sm border border-slate-200 rounded-full text-slate-600 hover:text-blue-600 hover:border-blue-300 transition-all duration-300 shadow-sm hover:shadow-md">
+            <a href="https://github.com/oluwaseyipd/" target="_blank" className="p-3 bg-white/80 backdrop-blur-sm border border-slate-200 rounded-full text-slate-600 hover:text-blue-600 hover:border-blue-300 transition-all duration-300 shadow-sm hover:shadow-md">
               <Github className="w-5 h-5" />
             </a>
-            <a href="#" className="p-3 bg-white/80 backdrop-blur-sm border border-slate-200 rounded-full text-slate-600 hover:text-blue-600 hover:border-blue-300 transition-all duration-300 shadow-sm hover:shadow-md">
+            <a href="https://www.linkedin.com/in/oluwaseyiae/" target="_blank" className="p-3 bg-white/80 backdrop-blur-sm border border-slate-200 rounded-full text-slate-600 hover:text-blue-600 hover:border-blue-300 transition-all duration-300 shadow-sm hover:shadow-md">
               <Linkedin className="w-5 h-5" />
             </a>
-            <a href="#" className="p-3 bg-white/80 backdrop-blur-sm border border-slate-200 rounded-full text-slate-600 hover:text-blue-600 hover:border-blue-300 transition-all duration-300 shadow-sm hover:shadow-md">
+            <a href="mailto:oluwaseyiea@gmail.com" className="p-3 bg-white/80 backdrop-blur-sm border border-slate-200 rounded-full text-slate-600 hover:text-blue-600 hover:border-blue-300 transition-all duration-300 shadow-sm hover:shadow-md">
               <Mail className="w-5 h-5" />
             </a>
           </div>
@@ -167,7 +167,7 @@ const Hero = () => {
         </div>
       </div>
 
-      <style jsx>{`
+      <style>{`
         @keyframes float {
           0%, 100% { transform: translateY(0px); }
           50% { transform: translateY(-10px); }
