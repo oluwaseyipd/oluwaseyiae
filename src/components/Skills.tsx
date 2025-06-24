@@ -26,12 +26,12 @@ const Skills = () => {
   const categories = [...new Set(technicalSkills.map(skill => skill.category))];
 
   return (
-    <section id="skills" className="py-12 sm:py-16 lg:py-20 bg-gradient-to-br from-slate-50 via-indigo-50 to-cyan-50">
-      <div className="max-w-6xl mx-auto sm:px-6 md:px-12 lg:px-6 ">
+    <section id="skills" className="py-12 sm:py-16 lg:py-20 bg-white">
+      <div className="max-w-7xl mx-auto sm:px-6 md:px-12 lg:px-6">
 <h2 className="text-4xl lg:text-5xl font-bold text-slate-900 mb-4 text-center">          Skills & Expertise
         </h2>
 
-        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 sm:px-6 md:px-12 lg:px-6">
           {/* Technical Skills */}
           <div className="space-y-6">
             <div className="text-center lg:text-left">

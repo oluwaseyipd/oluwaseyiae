@@ -33,7 +33,7 @@ const Blog = () => {
   ];
 
   return (
-    <section id="blog" className="py-20 bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 relative overflow-hidden">
+    <section id="blog" className="py-20 bg-gradient-to-br from-slate-50 via-white to-blue-50 relative overflow-hidden">
       {/* Background Elements */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute top-40 right-20 w-80 h-80 bg-purple-500 rounded-full blur-3xl"></div>
@@ -47,7 +47,7 @@ const Blog = () => {
         <div className="absolute top-2/3 left-2/3 w-8 h-8 bg-gradient-to-r from-blue-200/30 to-purple-200/30 rounded-full animate-bounce delay-1000"></div>
       </div>
 
-      <div className="max-w-6xl mx-auto sm:px-6 md:px-12 lg:px-6 relative z-10">
+      <div className="max-w-7xl mx-auto sm:px-6 md:px-12 lg:px-6 relative z-10">
         {/* Section Header */}
         <div className="text-center mb-16">
           <h2 className="text-4xl lg:text-5xl font-bold text-slate-900 mb-4">
