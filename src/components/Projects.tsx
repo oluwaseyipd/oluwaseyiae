@@ -92,7 +92,7 @@ const Projects = () => {
                     <Button size="sm" className="bg-blue-600 hover:bg-blue-700">
                       Live Demo
                     </Button>
-                    <Button size="sm" variant="outline" className="border-gray-600 text-gray-300 hover:bg-gray-700">
+                    <Button size="sm" className="border-blue-600 text-blue-600 bg-white hover:text-white hover:bg-gray-700">
                       GitHub
                     </Button>
                   </div>
@@ -103,7 +103,7 @@ const Projects = () => {
                         onClick={() => setExpandedProject(expandedProject === project.id ? null : project.id)}
                         variant="ghost"
                         size="sm"
-                        className="text-purple-400 hover:text-purple-300"
+                        className="text-purple-400 hover:bg-purple-700 hover:text-white"
                       >
                         {expandedProject === project.id ? 'Hide' : 'View'} Case Study
                       </Button>

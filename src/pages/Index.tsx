@@ -13,7 +13,7 @@ import OpenToWork from "@/components/OpenToWork";
 const Index = () => {
   return (
     <div className="min-h-screen bg-gray-900 text-white overflow-x-hidden">
-      <OpenToWork />
+      {/* <OpenToWork /> */}
       <Hero />
       <About />
       <Projects />
