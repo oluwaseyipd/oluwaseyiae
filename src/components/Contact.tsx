@@ -3,41 +3,153 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 
+type Errors = {
+  name?: string;
+  email?: string;
+  message?: string;
+  submit?: string;
+};
+
 const Contact = () => {
-  const [formData, setFormData] = useState({
+    const [formData, setFormData] = useState({
     name: '',
     email: '',
     message: ''
   });
+
+  const [errors, setErrors] = useState<Errors>({});
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const handleSubmit = (e) => {
+  // Email validation regex
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  const validateForm = () => {
+    const newErrors = {};
+
+    // Name validation
+    if (!formData.name.trim()) {
+      newErrors.name = 'Name is required';
+    } else if (formData.name.trim().length < 2) {
+      newErrors.name = 'Name must be at least 2 characters long';
+    } else if (formData.name.trim().length > 50) {
+      newErrors.name = 'Name must be less than 50 characters';
+    }
+
+    // Email validation
+    if (!formData.email.trim()) {
+      newErrors.email = 'Email is required';
+    } else if (!emailRegex.test(formData.email.trim())) {
+      newErrors.email = 'Please enter a valid email address';
+    } else if (formData.email.length > 100) {
+      newErrors.email = 'Email must be less than 100 characters';
+    }
+
+    // Message validation
+    if (!formData.message.trim()) {
+      newErrors.message = 'Message is required';
+    } else if (formData.message.trim().length < 10) {
+      newErrors.message = 'Message must be at least 10 characters long';
+    } else if (formData.message.trim().length > 1000) {
+      newErrors.message = 'Message must be less than 1000 characters';
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    // Basic validation
-    if (!formData.name || !formData.email || !formData.message) {
-      alert('Please fill in all fields');
+    if (!validateForm()) {
       return;
     }
 
-    // Simulate form submission
-    console.log('Form submitted:', formData);
-    setIsSubmitted(true);
+    setIsSubmitting(true);
     
-    // Reset form after 3 seconds
-    setTimeout(() => {
-      setIsSubmitted(false);
-      setFormData({ name: '', email: '', message: '' });
-    }, 3000);
+    try {
+      // Simulate API call - replace with your actual form submission logic
+      await new Promise(resolve => setTimeout(resolve, 2000));
+      
+      // Here you would typically send the data to your backend
+      console.log('Form submitted:', {
+        name: formData.name.trim(),
+        email: formData.email.trim(),
+        message: formData.message.trim(),
+        timestamp: new Date().toISOString()
+      });
+      
+      setIsSubmitted(true);
+      
+      // Reset form after successful submission
+      setTimeout(() => {
+        setIsSubmitted(false);
+        setFormData({ name: '', email: '', message: '' });
+        setErrors({});
+      }, 4000);
+      
+    } catch (error) {
+      console.error('Form submission error:', error);
+      setErrors({ submit: 'There was an error sending your message. Please try again.' });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+
+    // Clear error when user starts typing
+    if (errors[name]) {
+      setErrors(prev => ({
+        ...prev,
+        [name]: ''
+      }));
+    }
   };
 
+  const handleBlur = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name } = e.target;
+    
+    // Validate individual field on blur
+    const fieldErrors = {};
+    
+    if (name === 'name') {
+      if (!formData.name.trim()) {
+        fieldErrors.name = 'Name is required';
+      } else if (formData.name.trim().length < 2) {
+        fieldErrors.name = 'Name must be at least 2 characters long';
+      }
+    }
+    
+    if (name === 'email') {
+      if (!formData.email.trim()) {
+        fieldErrors.email = 'Email is required';
+      } else if (!emailRegex.test(formData.email.trim())) {
+        fieldErrors.email = 'Please enter a valid email address';
+      }
+    }
+    
+    if (name === 'message') {
+      if (!formData.message.trim()) {
+        fieldErrors.message = 'Message is required';
+      } else if (formData.message.trim().length < 10) {
+        fieldErrors.message = 'Message must be at least 10 characters long';
+      }
+    }
+
+    setErrors(prev => ({
+      ...prev,
+      ...fieldErrors
+    }));
+  };
+
+  let currentYear = new Date().getFullYear();
   return (
     <section id="contact" className="bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 relative overflow-hidden">
       {/* Decorative elements */}
@@ -71,21 +183,52 @@ const Contact = () => {
                 Send Me a Message
               </h3>
               
-              {isSubmitted ? (
-                <div className="text-center py-12">
-                  <div className="w-20 h-20 bg-gradient-to-r from-green-400 to-green-500 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
-                    <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                    </svg>
+            {isSubmitted ? (
+                <div className="text-center py-12 animate-fade-in">
+                  <div className="relative">
+                    <div className="w-24 h-24 bg-gradient-to-r from-green-400 via-emerald-500 to-green-600 rounded-full flex items-center justify-center mx-auto mb-6 shadow-2xl animate-bounce">
+                      <svg className="w-12 h-12 text-white animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
+                    </div>
+                    {/* Celebration particles */}
+                    <div className="absolute -top-2 left-1/2 transform -translate-x-1/2">
+                      <div className="w-2 h-2 bg-yellow-400 rounded-full animate-ping"></div>
+                    </div>
+                    <div className="absolute top-4 left-1/4 transform -translate-x-1/2">
+                      <div className="w-1 h-1 bg-blue-400 rounded-full animate-ping" style={{animationDelay: '0.2s'}}></div>
+                    </div>
+                    <div className="absolute top-4 right-1/4 transform translate-x-1/2">
+                      <div className="w-1 h-1 bg-purple-400 rounded-full animate-ping" style={{animationDelay: '0.4s'}}></div>
+                    </div>
                   </div>
-                  <h4 className="text-2xl font-bold text-slate-800 mb-3">Message Sent!</h4>
-                  <p className="text-slate-600 text-lg">Thank you for reaching out. I'll get back to you soon!</p>
+                  
+                  <h4 className="text-3xl font-bold bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent mb-4 animate-fade-in">
+                    🎉 Message Sent Successfully!
+                  </h4>
+                  <p className="text-slate-600 text-lg mb-4 animate-fade-in" style={{animationDelay: '0.2s'}}>
+                    Thank you for reaching out! Your message means a lot to me.
+                  </p>
+                  <div className="bg-gradient-to-r from-green-50 to-emerald-50 border border-green-200 rounded-2xl p-6 mx-auto max-w-md animate-fade-in" style={{animationDelay: '0.4s'}}>
+                    <p className="text-green-800 font-medium mb-2">✨ What happens next?</p>
+                    <p className="text-green-700 text-sm">
+                      I'll review your message and get back to you within 24 hours. 
+                      Looking forward to our conversation!
+                    </p>
+                  </div>
                 </div>
               ) : (
                 <div className="space-y-6">
-                  <div>
+                  {/* Global form error */}
+                  {errors.submit && (
+                    <div className="bg-red-50 border border-red-200 rounded-xl p-4">
+                      <p className="text-red-700 text-sm">{errors.submit}</p>
+                    </div>
+                  )}
+
+                  <form onSubmit={handleSubmit} className="space-y-6">
                     <label htmlFor="name" className="block text-slate-700 font-medium mb-2">
-                      Your Name
+                      Your Name *
                     </label>
                     <Input
                       type="text"
@@ -93,15 +236,23 @@ const Contact = () => {
                       name="name"
                       value={formData.name}
                       onChange={handleChange}
-                      className="bg-white/70 border-slate-200 text-slate-800 focus:border-blue-400 focus:ring-blue-400/20 rounded-xl"
+                      onBlur={handleBlur}
+                      className={`bg-white/70 border-slate-200 text-slate-800 focus:border-blue-400 focus:ring-blue-400/20 rounded-xl ${
+                        errors.name ? 'border-red-400 focus:border-red-400 focus:ring-red-400/20' : ''
+                      }`}
                       placeholder="John Doe"
-                      required
+                      maxLength={50}
+                      aria-invalid={errors.name ? 'true' : 'false'}
+                      aria-describedby={errors.name ? 'name-error' : undefined}
                     />
-                  </div>
+                    {errors.name && (
+                      <p id="name-error" className="text-red-600 text-sm mt-1">{errors.name}</p>
+                    )}
+                  </form>
 
                   <div>
                     <label htmlFor="email" className="block text-slate-700 font-medium mb-2">
-                      Email Address
+                      Email Address *
                     </label>
                     <Input
                       type="email"
@@ -109,36 +260,73 @@ const Contact = () => {
                       name="email"
                       value={formData.email}
                       onChange={handleChange}
-                      className="bg-white/70 border-slate-200 text-slate-800 focus:border-blue-400 focus:ring-blue-400/20 rounded-xl"
+                      onBlur={handleBlur}
+                      className={`bg-white/70 border-slate-200 text-slate-800 focus:border-blue-400 focus:ring-blue-400/20 rounded-xl ${
+                        errors.email ? 'border-red-400 focus:border-red-400 focus:ring-red-400/20' : ''
+                      }`}
                       placeholder="john@example.com"
-                      required
+                      maxLength={100}
+                      aria-invalid={errors.email ? 'true' : 'false'}
+                      aria-describedby={errors.email ? 'email-error' : undefined}
                     />
+                    {errors.email && (
+                      <p id="email-error" className="text-red-600 text-sm mt-1">{errors.email}</p>
+                    )}
                   </div>
 
                   <div>
                     <label htmlFor="message" className="block text-slate-700 font-medium mb-2">
-                      Message
+                      Message *
                     </label>
                     <Textarea
                       id="message"
                       name="message"
                       value={formData.message}
                       onChange={handleChange}
-                      className="bg-white/70 border-slate-200 text-slate-800 focus:border-blue-400 focus:ring-blue-400/20 min-h-[120px] rounded-xl"
+                      onBlur={handleBlur}
+                      className={`bg-white/70 border-slate-200 text-slate-800 focus:border-blue-400 focus:ring-blue-400/20 min-h-[120px] rounded-xl resize-none ${
+                        errors.message ? 'border-red-400 focus:border-red-400 focus:ring-red-400/20' : ''
+                      }`}
                       placeholder="Let's discuss your project or opportunity..."
-                      required
+                      maxLength={1000}
+                      aria-invalid={errors.message ? 'true' : 'false'}
+                      aria-describedby={errors.message ? 'message-error' : undefined}
                     />
+                    <div className="flex justify-between items-center mt-1">
+                      {errors.message ? (
+                        <p id="message-error" className="text-red-600 text-sm">{errors.message}</p>
+                      ) : (
+                        <div></div>
+                      )}
+                      <p className="text-slate-400 text-sm">
+                        {formData.message.length}/1000
+                      </p>
+                    </div>
                   </div>
 
                   <Button 
                     type="submit"
-                    className="w-full bg-gradient-to-r from-blue-500 to-indigo-500 hover:from-blue-600 hover:to-indigo-600 text-white py-4 rounded-xl font-semibold text-lg shadow-lg hover:shadow-xl transform hover:scale-[1.02] transition-all duration-300"
+                    onClick={handleSubmit}
+                    disabled={isSubmitting}
+                    className="w-full bg-gradient-to-r from-blue-500 to-indigo-500 hover:from-blue-600 hover:to-indigo-600 text-white py-4 rounded-xl font-semibold text-lg shadow-lg hover:shadow-xl transform hover:scale-[1.02] transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
                   >
-                    Send Message
+                    {isSubmitting ? (
+                      <span className="flex items-center gap-2">
+                        <svg className="animate-spin h-5 w-5 text-white" fill="none" viewBox="0 0 24 24">
+                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                        Sending...
+                      </span>
+                    ) : (
+                      'Send Message'
+                    )}
                   </Button>
                 </div>
               )}
             </div>
+
+           
 
             {/* Contact Info */}
             <div className="space-y-8">
@@ -235,7 +423,7 @@ const Contact = () => {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
             <div className="flex flex-col md:flex-row justify-between items-center gap-4">
               <div className="text-slate-600">
-                <p className="text-sm">© {new Date().getFullYear()} Abiola John. All rights reserved.</p>
+                <p className="text-sm">© {currentYear} Abiola John. All rights reserved.</p>
               </div>
               <div className="flex items-center gap-6">
                 <a href="#about" className="text-slate-600 hover:text-slate-800 transition-colors text-sm">About</a>
