@@ -1,4 +1,4 @@
-import { Code, Database, GitBranch, Globe, icons, Palette, Smartphone, Terminal, Zap } from "lucide-react";
+// import { Code, Database, GitBranch, Globe, icons, Palette, Smartphone, Terminal, Zap } from "lucide-react";
 import { FaHtml5, FaCss3, FaGithub, FaGitAlt, FaBootstrap, FaReact, FaSass, FaCode, FaJs  } from "react-icons/fa6";
 
 const Skills = () => {
