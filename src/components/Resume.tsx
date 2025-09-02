@@ -91,7 +91,7 @@ const Resume = () => {
                 </svg>
                 Download Resume (PDF)
               </Button>
-              <p className="text-slate-500 text-sm mt-3">Updated • 2024 • PDF Format</p>
+              <p className="text-slate-500 text-sm mt-3">Updated • 2025 • PDF Format</p>
             </div>
           </div>
 
@@ -173,11 +173,11 @@ const Resume = () => {
         {/* Quick Stats */}
         <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6">
           <div className="text-center bg-white/60 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
-            <div className="text-2xl font-bold text-slate-800 mb-2">1+</div>
+            <div className="text-2xl font-bold text-slate-800 mb-2">2+</div>
             <div className="text-slate-600 text-sm">Years Experience</div>
           </div>
           <div className="text-center bg-white/60 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
-            <div className="text-2xl font-bold text-slate-800 mb-2">5+</div>
+            <div className="text-2xl font-bold text-slate-800 mb-2">10+</div>
             <div className="text-slate-600 text-sm">Projects Completed</div>
           </div>
           <div className="text-center bg-white/60 backdrop-blur-sm rounded-2xl p-6 border border-white/20">

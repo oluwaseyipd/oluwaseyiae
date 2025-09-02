@@ -140,24 +140,6 @@ const Projects = () => {
                     
                     {/* Subtle Gradient Overlay */}
                     <div className={`absolute inset-0 bg-gradient-to-br ${project.gradient} opacity-0 group-hover:opacity-30 transition-opacity duration-500`}></div>
-                    
-                    {/* Hover Actions */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center gap-4">
-                      <Button
-                        size="sm"
-                        className="bg-white/90 backdrop-blur-sm text-slate-800 hover:bg-white hover:scale-105 shadow-lg transition-all duration-300"
-                      >
-                        <Eye className="w-4 h-4 mr-2" />
-                        Preview
-                      </Button>
-                      <Button
-                        size="sm"
-                        className="bg-slate-800/90 backdrop-blur-sm text-white hover:bg-slate-800 hover:scale-105 shadow-lg transition-all duration-300"
-                      >
-                        <Code className="w-4 h-4 mr-2" />
-                        Code
-                      </Button>
-                    </div>
 
                     {/* Floating Elements */}
                     <div className="absolute top-4 left-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500">

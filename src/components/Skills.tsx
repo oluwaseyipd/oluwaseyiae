@@ -1,5 +1,5 @@
 // import { Code, Database, GitBranch, Globe, icons, Palette, Smartphone, Terminal, Zap } from "lucide-react";
-import { FaHtml5, FaCss3, FaGithub, FaGitAlt, FaBootstrap, FaReact, FaSass, FaCode, FaJs  } from "react-icons/fa6";
+import { FaHtml5, FaCss3, FaGithub, FaGitAlt, FaBootstrap, FaReact, FaSass, FaCode, FaJs, FaNpm } from "react-icons/fa6";
 
 const Skills = () => {
   const technicalSkills = [
@@ -12,15 +12,16 @@ const Skills = () => {
     { name: "Sass/SCSS", icon: FaSass, category: "Frontend", color: "text-pink-500" },
     { name: "Git", icon: FaGitAlt, category: "Tools", color: "text-red-500" },
     { name: "GitHub", icon: FaGithub, category: "Tools", color: "text-gray-700" },
+     { name: "NPM", icon: FaNpm, category: "Tools", color: "text-gray-700" },
   ];
 
   const softSkills = [
-    { name: "Problem Solving", icon: "🧠" },
-    { name: "Team Collaboration", icon: "🤝" }, 
-    { name: "Communication", icon: "💬" },
-    { name: "Time Management", icon: "⏰" },
-    { name: "Adaptability", icon: "🔄" },
-    { name: "Leadership", icon: "👑" }
+    { name: "Problem Solving", },
+    { name: "Team Collaboration", }, 
+    { name: "Communication", },
+    { name: "Time Management", },
+    { name: "Adaptability", },
+    { name: "Leadership",}
   ];
 
   const categories = [...new Set(technicalSkills.map(skill => skill.category))];
@@ -82,30 +83,11 @@ const Skills = () => {
                     className="group flex items-center gap-3 bg-gradient-to-r from-purple-50 to-pink-50 p-3 sm:p-4 rounded-xl border border-purple-200 hover:border-purple-300 hover:shadow-md transition-all duration-300 transform hover:scale-105"
                     style={{ animationDelay: `${index * 0.1}s` }}
                   >
-                    <div className="text-xl sm:text-2xl group-hover:scale-110 transition-transform">
-                      {skill.icon}
-                    </div>
                     <span className="text-sm sm:text-base text-gray-700 font-medium flex-1">
                       {skill.name}
                     </span>
                   </div>
                 ))}
-              </div>
-            </div>
-
-            {/* Experience Badges */}
-            <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-4 sm:p-6 border border-gray-200 shadow-md">
-              <h4 className="text-base sm:text-lg font-semibold text-gray-700 mb-4">Experience Level</h4>
-              <div className="flex flex-wrap gap-2 sm:gap-3">
-                <div className="px-3 sm:px-4 py-2 bg-gradient-to-r from-green-500 to-emerald-500 text-white rounded-full shadow-sm">
-                  <span className="text-xs sm:text-sm font-medium">1+ Years Frontend</span>
-                </div>
-                <div className="px-3 sm:px-4 py-2 bg-gradient-to-r from-blue-500 to-cyan-500 text-white rounded-full shadow-sm">
-                  <span className="text-xs sm:text-sm font-medium">React Specialist</span>
-                </div>
-                <div className="px-3 sm:px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-full shadow-sm">
-                  <span className="text-xs sm:text-sm font-medium">UI/UX Focused</span>
-                </div>
               </div>
             </div>
           </div>

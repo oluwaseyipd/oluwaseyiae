@@ -2,43 +2,43 @@ const Achievements = () => {
   const achievements = [
     {
       id: 1,
-      title: "SQI College of ICT Internship",
-      description: "Currently completing Frontend Development internship, working on real-world projects",
-      date: "2024 - Present",
+      title: "Served as a Facilitator at SQI College of ICT",
+      description: " Facilitated a 5-week web development summer program for young minds aged 8-12, teaching them how to leverage AI tools for development.",
+      date: "August 2025 - September 2025",
       icon: "🎓",
-      type: "Education"
-    },
-    {
-      id: 2,
-      title: "Founded Thrive Link",
-      description: "Created and launched a community platform for tech professionals and enthusiasts",
-      date: "2023",
-      icon: "🚀",
-      type: "Entrepreneurship"
-    },
-    {
-      id: 3,
-      title: "20-Day Coding Challenge",
-      description: "Completed intensive coding challenge, building 20 projects in 20 days",
-      date: "2023",
-      icon: "💪",
       type: "Personal Growth"
     },
     {
-      id: 4,
-      title: "First React Application",
-      description: "Built and deployed my first full-stack React application with user authentication",
-      date: "2022",
-      icon: "⚛️",
+      id: 2,
+      title: "Serving as a Mentor at ALX Naija",
+      description: "Currently serving as a volunteer mentor in the ALX Naija Software Engineering Program, guiding students through their learning journey.",
+      date: "2025 - Present",
+      icon: "🚀",
       type: "Technical Milestone"
     },
     {
+      id: 3,
+      title: "Completed ALX SE Program",
+      description: "Graduated as a top student in the ALX Software Engineering 8-month program, specializing in Frontend Development.",
+      date: " January 2025 - September 2025",
+      icon: "💪 🎓",
+      type: "Education"
+    },
+    {
+      id: 4,
+      title: "Completed ALX Professional Foundations Program",
+      description: "Completed a 3-month program focused on key professional skills for workplace success.",
+      date: "January 2025 - April 2025",
+      icon: " 🎓",
+      type: "Education"
+    },
+    {
       id: 5,
-      title: "Open Source Contributor",
-      description: "Active contributor to various open-source projects and community initiatives",
-      date: "2022 - Present",
-      icon: "🌟",
-      type: "Community"
+      title: "First React Application",
+      description: "Built and deployed my first full-stack React application with user authentication.",
+      date: "January 2025",
+      icon: "⚛️",
+      type: "Technical Milestone"
     }
   ];
 

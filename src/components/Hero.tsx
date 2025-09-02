@@ -6,7 +6,7 @@ import heroPicture from "@/img/hero-img.png";
 const Hero = () => {
   const [currentRole, setCurrentRole] = useState(0);
   const roles = ["Frontend Developer", "React Specialist", "UI/UX Enthusiast", "Problem Solver"];
-  const skills = ["React", "TypeScript", "Tailwind", "Bootstrap", "Node.js"];
+  const skills = ["React", "Tailwind", "Bootstrap", "RESTful API"];
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -45,10 +45,6 @@ const Hero = () => {
         {/* Left Content */}
         <div className="space-y-8">
           <div className="space-y-4">
-            <div className="flex items-center gap-2 text-blue-600 font-medium">
-              <Sparkles className="w-5 h-5" />
-              <span>Available for Hire</span>
-            </div>
             
             <h1 className="text-5xl lg:text-6xl font-bold text-slate-900 leading-tight">
               Hi, I'm{' '}
@@ -152,7 +148,7 @@ const Hero = () => {
             
             <div className="absolute -bottom-8 -left-8 bg-white/95 backdrop-blur-sm rounded-2xl shadow-lg border border-white/50 p-4 animate-float" style={{animationDelay: '1s'}}>
               <div className="text-center">
-                <div className="text-2xl font-bold text-indigo-600">1+</div>
+                <div className="text-2xl font-bold text-indigo-600">2+</div>
                 <div className="text-xs text-slate-600 font-medium">Years Exp</div>
               </div>
             </div>

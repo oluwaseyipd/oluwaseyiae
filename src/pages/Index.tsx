@@ -8,7 +8,6 @@ import Achievements from "@/components/Achievements";
 import Testimonials from "@/components/Testimonials";
 import Resume from "@/components/Resume";
 import Contact from "@/components/Contact";
-import OpenToWork from "@/components/OpenToWork";
 
 const Index = () => {
   return (
@@ -16,9 +15,9 @@ const Index = () => {
       {/* <OpenToWork /> */}
       <Hero />
       <About />
-      <Projects />
-      <Blog />
       <Skills />
+      <Projects />
+      {/* <Blog /> */}
       <Achievements />
       <Testimonials />
       <Resume />
