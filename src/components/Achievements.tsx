@@ -2,51 +2,59 @@ const Achievements = () => {
   const achievements = [
     {
       id: 1,
-      title: "Served as a Facilitator at SQI College of ICT",
-      description: " Facilitated a 5-week web development summer program for young minds aged 8-12, teaching them how to leverage AI tools for development.",
-      date: "August 2025 - September 2025",
-      icon: "🎓",
-      type: "Personal Growth"
+      title: "Serving as a Mentor at ALX Naija",
+      description:
+        "Currently serving as a volunteer mentor in the ALX Naija Software Engineering Program, guiding students through their learning journey.",
+      date: "September 2025 - Present",
+      icon: "🚀",
+      type: "Technical Milestone",
     },
     {
-      id: 2,
-      title: "Serving as a Mentor at ALX Naija",
-      description: "Currently serving as a volunteer mentor in the ALX Naija Software Engineering Program, guiding students through their learning journey.",
-      date: "2025 - Present",
-      icon: "🚀",
-      type: "Technical Milestone"
+      id: 1,
+      title: "Served as a Facilitator at SQI College of ICT",
+      description:
+        " Facilitated a 5-week web development summer program for young minds aged 8-12, teaching them how to leverage AI tools for development.",
+      date: "August 2025 - September 2025",
+      icon: "🎓",
+      type: "Personal Growth",
     },
     {
       id: 3,
       title: "Completed ALX SE Program",
-      description: "Graduated as a top student in the ALX Software Engineering 8-month program, specializing in Frontend Development.",
+      description:
+        "Graduated as a top student in the ALX Software Engineering 8-month program, specializing in Frontend Development.",
       date: " January 2025 - September 2025",
       icon: "💪 🎓",
-      type: "Education"
+      type: "Education",
     },
     {
       id: 4,
       title: "Completed ALX Professional Foundations Program",
-      description: "Completed a 3-month program focused on key professional skills for workplace success.",
+      description:
+        "Completed a 3-month program focused on key professional skills for workplace success.",
       date: "January 2025 - April 2025",
       icon: " 🎓",
-      type: "Education"
+      type: "Education",
     },
     {
       id: 5,
       title: "First React Application",
-      description: "Built and deployed my first full-stack React application with user authentication.",
+      description:
+        "Built and deployed my first full-stack React application with user authentication.",
       date: "January 2025",
       icon: "⚛️",
-      type: "Technical Milestone"
-    }
+      type: "Technical Milestone",
+    },
   ];
 
   return (
-    <section id="achievements" className="py-12 sm:py-16 lg:py-20 bg-gradient-to-br from-slate-50 via-white to-blue-50 ">
+    <section
+      id="achievements"
+      className="py-12 sm:py-16 lg:py-20 bg-gradient-to-br from-slate-50 via-white to-blue-50 "
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-4xl lg:text-5xl font-bold text-slate-900 mb-4 text-center">          
-           Achievements & Highlights
+        <h2 className="text-4xl lg:text-5xl font-bold text-slate-900 mb-4 text-center">
+          Achievements & Highlights
         </h2>
 
         <div className="relative">
@@ -55,18 +63,22 @@ const Achievements = () => {
 
           <div className="space-y-6 sm:space-y-8 lg:space-y-12">
             {achievements.map((achievement, index) => (
-              <div key={achievement.id} className={`relative flex ${
-                index % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'
-              }`}>
+              <div
+                key={achievement.id}
+                className={`relative flex ${
+                  index % 2 === 0 ? "lg:flex-row" : "lg:flex-row-reverse"
+                }`}
+              >
                 {/* Timeline Node */}
                 <div className="absolute left-4 sm:left-6 lg:left-1/2 lg:transform lg:-translate-x-1/2 w-3 h-3 lg:w-4 lg:h-4 bg-white rounded-full border-2 lg:border-4 border-blue-500 z-10 shadow-lg mt-2"></div>
 
                 {/* Content Container */}
-                <div className={`w-full lg:w-5/12 pl-12 sm:pl-16 lg:pl-0 ${
-                  index % 2 === 0 ? 'lg:pr-8' : 'lg:pl-8'
-                }`}>
+                <div
+                  className={`w-full lg:w-5/12 pl-12 sm:pl-16 lg:pl-0 ${
+                    index % 2 === 0 ? "lg:pr-8" : "lg:pl-8"
+                  }`}
+                >
                   <div className="bg-white/80 backdrop-blur-sm p-4 sm:p-6 rounded-xl border border-gray-200 hover:border-blue-300 transition-all duration-300 transform hover:scale-105 hover:shadow-xl shadow-md">
-                    
                     {/* Mobile/Tablet Layout - Stacked */}
                     <div className="block lg:hidden">
                       <div className="flex items-center gap-3 mb-3">
