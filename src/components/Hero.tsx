@@ -18,7 +18,13 @@ const Hero = () => {
     "UI/UX Enthusiast",
     "Problem Solver",
   ];
-  const skills = ["React", "Typescript", "Tailwind", "Bootstrap", "RESTful API"];
+  const skills = [
+    "React",
+    "Typescript",
+    "Tailwind",
+    "Bootstrap",
+    "RESTful API",
+  ];
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -129,12 +135,12 @@ const Hero = () => {
               variant="outline"
               className="px-8 py-4 border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white font-medium rounded-lg transition-all duration-300 transform hover:-translate-y-0.5"
             >
-             <a
-              href="public/ABIOLA_JOHN_OLUWASEYI_FRONTEND_DEVELOPER.pdf"
-              target="blank"
-            >
-              My Resume
-            </a>
+              <a
+                href="public/ABIOLA_JOHN_OLUWASEYI_FRONTEND_DEVELOPER.pdf"
+                target="blank"
+              >
+                My Resume
+              </a>
             </Button>
           </div>
 
@@ -202,11 +208,11 @@ const Hero = () => {
       </div>
 
       {/* Scroll Indicator */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+      {/*<div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
         <div className="w-6 h-10 border-2 border-blue-400 rounded-full flex justify-center">
           <div className="w-1 h-3 bg-blue-400 rounded-full mt-2 animate-pulse"></div>
         </div>
-      </div>
+      </div>*/}
 
       <style>{`
         @keyframes float {
