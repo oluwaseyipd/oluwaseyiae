@@ -18,7 +18,7 @@ const Hero = () => {
     "UI/UX Enthusiast",
     "Problem Solver",
   ];
-  const skills = ["React", "Tailwind", "Bootstrap", "RESTful API"];
+  const skills = ["React", "Typescript", "Tailwind", "Bootstrap", "RESTful API"];
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -125,13 +125,16 @@ const Hero = () => {
               View My Work
               <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </Button>
-
             <Button
-              onClick={scrollToContact}
               variant="outline"
               className="px-8 py-4 border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white font-medium rounded-lg transition-all duration-300 transform hover:-translate-y-0.5"
             >
-              Let's Connect
+             <a
+              href="public/ABIOLA_JOHN_OLUWASEYI_FRONTEND_DEVELOPER.pdf"
+              target="blank"
+            >
+              My Resume
+            </a>
             </Button>
           </div>
 
@@ -174,16 +177,16 @@ const Hero = () => {
             </div>
 
             {/* Floating Achievement Cards */}
-            <div className="absolute -top-8 -right-8 bg-white/95 backdrop-blur-sm rounded-2xl shadow-lg border border-white/50 p-4 animate-float">
+            {/* <div className="absolute -top-8 -right-8 bg-white/95 backdrop-blur-sm rounded-2xl shadow-lg border border-white/50 p-4 animate-float">
               <div className="text-center">
                 <div className="text-2xl font-bold text-blue-600">10+</div>
                 <div className="text-xs text-slate-600 font-medium">
                   Projects
                 </div>
               </div>
-            </div>
+            </div> */}
 
-            <div
+            {/* <div
               className="absolute -bottom-8 -left-8 bg-white/95 backdrop-blur-sm rounded-2xl shadow-lg border border-white/50 p-4 animate-float"
               style={{ animationDelay: "1s" }}
             >
@@ -193,7 +196,7 @@ const Hero = () => {
                   Years Exp
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

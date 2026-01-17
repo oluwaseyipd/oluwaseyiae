@@ -2,8 +2,13 @@ import { Button } from "@/components/ui/button";
 
 const Resume = () => {
   const downloadResume = () => {
-    // This would normally trigger a PDF download
-    console.log("Downloading resume...");
+    // Create a temporary anchor element to trigger the download
+    const link = document.createElement("a");
+    link.href = "/ABIOLA_JOHN_OLUWASEYI_FRONTEND_DEVELOPER.pdf";
+    link.download = "ABIOLA_JOHN_OLUWASEYI_FRONTEND_DEVELOPER.pdf";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   };
 
   return (
@@ -82,7 +87,7 @@ const Resume = () => {
                     </h4>
                     <p className="text-slate-600">
                       React.js, JavaScript, TypeScript, HTML5, CSS3, Tailwind
-                      CSS, Node.js, and modern development tools
+                      CSS, and modern development tools
                     </p>
                   </div>
                 </div>
@@ -135,8 +140,8 @@ const Resume = () => {
                       Featured Projects
                     </h4>
                     <p className="text-slate-600">
-                      Detailed breakdown of major projects including Tasktide
-                      and Lewa's Growth Oil Website.
+                      Detailed breakdown of major projects including Acta and
+                      Thrive Link Community Website.
                     </p>
                   </div>
                 </div>
@@ -195,15 +200,14 @@ const Resume = () => {
                     <div className="space-y-2 text-slate-600">
                       <p>
                         <span className="font-medium">Frontend:</span> React.js,
-                        JavaScript, HTML5, CSS3
+                        JavaScript, TypeScript, HTML5, CSS3
                       </p>
                       <p>
                         <span className="font-medium">Styling:</span> Tailwind
                         CSS, Styled Components
                       </p>
                       <p>
-                        <span className="font-medium">Tools:</span> Git,
-                        Node.js, Webpack
+                        <span className="font-medium">Tools:</span> Git, Webpack
                       </p>
                     </div>
                   </div>
@@ -214,14 +218,14 @@ const Resume = () => {
                       Experience
                     </h5>
                     <div className="space-y-2 text-slate-600">
-                      <p className="font-medium text-slate-800">
-                        Frontend Developer Intern
-                      </p>
+                      <p className="font-medium text-slate-800">Team Lead</p>
                       <p className="text-xs text-slate-500">
-                        SQI College of ICT • 2024
+                        Higher Ground Baptist Church • 2023 - Present
                       </p>
                       <p className="text-xs">
-                        Developed responsive web applications using React.js
+                        Orchestrated a cross-functional team of UI/UX designers,
+                        Developers and Writers to deliver higher-perfomance web
+                        solution for the church management.
                       </p>
                     </div>
                   </div>
@@ -234,18 +238,20 @@ const Resume = () => {
                     <div className="space-y-3 text-slate-600">
                       <div>
                         <p className="font-medium text-slate-800 text-xs">
-                          Thrive Link Platform
+                          Thrive Link Community Website
                         </p>
                         <p className="text-xs">
-                          Social platform with React.js & modern UI
+                          Official website for Thrive Link Community with React,
+                          Tailwind css & shadcn/ui
                         </p>
                       </div>
                       <div>
                         <p className="font-medium text-slate-800 text-xs">
-                          E-Commerce Dashboard
+                          Acta - Task Management App
                         </p>
                         <p className="text-xs">
-                          Admin panel with data visualization
+                          Organized tasks and boost productivity with this
+                          React-based task management app.
                         </p>
                       </div>
                     </div>

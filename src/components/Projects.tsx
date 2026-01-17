@@ -19,18 +19,18 @@ const Projects = () => {
   const projects = [
     {
       id: 1,
-      title: "TaskTide",
+      title: "Acta",
       description:
         "A modern and responsive task management web app built with React and Tailwind CSS, connected to a Django REST API backend.",
-      tech: ["React", "Tailwind CSS", "Axios", "Lucide React", "Framer Motion"],
-      liveDemo: "https://taskstide.vercel.app",
-      github: "https://github.com/oluwaseyipd/tasktide-flow-ui",
+      tech: ["React", "Typescript", "Tailwind CSS", "Axios", "Lucide React", "Framer Motion"],
+      liveDemo: "https://acta-psi.vercel.app",
+      github: "https://github.com/oluwaseyipd/acta-frontend",
       image:
-        "https://images.unsplash.com/photo-1556761175-4b46a572b786?w=600&h=400&fit=crop",
+        "https://res.cloudinary.com/ddk9omr4r/image/upload/v1768639376/Screenshot_from_2026-01-14_10-17-52_wuvwxn.png",
       status: "Live",
       caseStudy: {
         problem:
-          "The initial version of TaskTide had only a backend API. There was no intuitive or user-friendly way for users to interact with their tasks visually.",
+          "The initial version of Acta had only a backend API. There was no intuitive or user-friendly way for users to interact with their tasks visually.",
         solution:
           "Designed and developed a production-ready frontend using React and Tailwind CSS, featuring a clean interface, light and dark modes, reusable components, and smooth animations. The frontend integrates seamlessly with the Django REST API for task creation, updates, and management.",
         challenges:
@@ -41,12 +41,12 @@ const Projects = () => {
     },
     {
       id: 2,
-      title: "Lewa’s Growth Oil Website",
+      title: "Thrive Link Community",
       description:
         "Elegant and responsive brand website showcasing natural hair care products.",
       tech: ["Next.js", "Tailwind CSS", "shadcn/ui", "Vercel"],
-      liveDemo: "https://lewasgrowthoil.vercel.app",
-      github: "https://github.com/oluwaseyipd/lewas-growth-oil",
+      liveDemo: "https://thrivelinks.vercel.app",
+      github: "https://github.com/oluwaseyipd/thrivelinks",
       image:
         "https://images.unsplash.com/photo-1556761175-4b46a572b786?w=600&h=400&fit=crop",
       status: "Live",
