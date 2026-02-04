@@ -136,7 +136,7 @@ const Hero = () => {
               className="px-8 py-4 border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white font-medium rounded-lg transition-all duration-300 transform hover:-translate-y-0.5"
             >
               <a
-                href="public/ABIOLA_JOHN_OLUWASEYI_FRONTEND_DEVELOPER.pdf"
+                href="/ABIOLA_JOHN_OLUWASEYI_FRONTEND_DEVELOPER.pdf"
                 target="blank"
               >
                 My Resume

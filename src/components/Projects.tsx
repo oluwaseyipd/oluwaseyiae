@@ -19,10 +19,17 @@ const Projects = () => {
   const projects = [
     {
       id: 1,
-      title: "Acta",
+      title: "Acta - A High-Performance Task Philosophy & App",
       description:
         "A modern and responsive task management web app built with React and Tailwind CSS, connected to a Django REST API backend.",
-      tech: ["React", "Typescript", "Tailwind CSS", "Axios", "Lucide React", "Framer Motion"],
+      tech: [
+        "React",
+        "Typescript",
+        "Tailwind CSS",
+        "Axios",
+        "Lucide React",
+        "Framer Motion",
+      ],
       liveDemo: "https://acta-psi.vercel.app",
       github: "https://github.com/oluwaseyipd/acta-frontend",
       image:
