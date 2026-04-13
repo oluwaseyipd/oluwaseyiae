@@ -24,7 +24,7 @@ interface ExperienceItem {
   org: string;
   period: string;
   description: string;
-  type: "certification" | "work" | "project";
+  type: "certification" | "work" | "project" | "volunteer";
 }
 
 function ExperienceCard({ item, index }: { item: ExperienceItem; index: number }) {
@@ -274,7 +274,7 @@ export function Experience() {
               </motion.div>
 
               <div>
-                {experience.map((item, i) => (
+                {experience.map((item: ExperienceItem, i) => (
                   <ExperienceCard key={item.id} item={item} index={i} />
                 ))}
               </div>
