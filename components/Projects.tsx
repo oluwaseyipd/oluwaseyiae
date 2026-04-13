@@ -1,8 +1,16 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { ExternalLink, Github, BookOpen, Hammer } from "lucide-react";
 import { projects } from "@/lib/data";
+import { useState } from "react";
+import StudyCase from "./StudyCase";
+
+interface CaseStudy {
+  problem: string;
+  solution: string;
+  impact: string;
+}
 
 interface Project {
   id: number;
@@ -12,12 +20,20 @@ interface Project {
   tech: string[];
   liveUrl: string;
   githubUrl: string;
-  caseStudyUrl: string;
   image: string;
   status: "live" | "building";
+  caseStudy: CaseStudy;
 }
 
-function ProjectCard({ project, index }: { project: Project; index: number }) {
+function ProjectCard({ 
+  project, 
+  index, 
+  onCaseStudyClick 
+}: { 
+  project: Project; 
+  index: number;
+  onCaseStudyClick: (projectId: number) => void;
+}) {
   return (
     <motion.article
       initial={{ opacity: 0, y: 50 }}
@@ -202,16 +218,41 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
             Live Demo
           </motion.a>
 
-          <motion.a
-            href={project.caseStudyUrl}
+          <motion.button
+            onClick={() => onCaseStudyClick(project.id)}
             whileHover={{ scale: 1.04 }}
             whileTap={{ scale: 0.97 }}
             className="btn-outline"
-            style={{ padding: "0.5rem 1rem", fontSize: "0.8rem", flex: 1, justifyContent: "center" }}
+            style={{ 
+              padding: "0.5rem 1rem", 
+              fontSize: "0.8rem", 
+              flex: 1, 
+              justifyContent: "center",
+              background: "transparent",
+              border: "1px solid var(--border)",
+              color: "var(--text-secondary)",
+              cursor: "pointer",
+              fontFamily: "inherit",
+              borderRadius: "0.5rem",
+              display: "flex",
+              alignItems: "center",
+              gap: "0.5rem",
+              transition: "all 300ms",
+            }}
+            onMouseEnter={(e) => {
+              const el = e.currentTarget as HTMLButtonElement;
+              el.style.background = "var(--surface-hover)";
+              el.style.color = "var(--text-primary)";
+            }}
+            onMouseLeave={(e) => {
+              const el = e.currentTarget as HTMLButtonElement;
+              el.style.background = "transparent";
+              el.style.color = "var(--text-secondary)";
+            }}
           >
             <BookOpen size={13} />
             Case Study
-          </motion.a>
+          </motion.button>
 
           <motion.a
             href={project.githubUrl}
@@ -243,6 +284,8 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
 }
 
 export function Projects() {
+  const [selectedProjectId, setSelectedProjectId] = useState<number | null>(null);
+
   return (
     <section id="projects" className="section">
       <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 1.5rem" }}>
@@ -298,11 +341,26 @@ export function Projects() {
             gap: "1.5rem",
           }}
         >
-          {projects.map((project, i) => (
-            <ProjectCard key={project.id} project={project} index={i} />
+          {(projects as Project[]).map((project, i) => (
+            <ProjectCard 
+              key={project.id} 
+              project={project} 
+              index={i}
+              onCaseStudyClick={setSelectedProjectId}
+            />
           ))}
         </div>
       </div>
+
+      {/* Case Study Modal */}
+      <AnimatePresence>
+        {selectedProjectId !== null && (
+          <StudyCase
+            projectId={selectedProjectId}
+            onClose={() => setSelectedProjectId(null)}
+          />
+        )}
+      </AnimatePresence>
     </section>
   );
 }

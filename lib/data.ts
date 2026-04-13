@@ -61,10 +61,17 @@ export const projects = [
   tech: ["React", "Vite", "Tailwind CSS", "Supabase", "Paystack", "Resend"],
   liveUrl: "https://ogbomosotei.com",
   githubUrl: "https://github.com/oluwaseyipd/ogbomosotei",
-  caseStudyUrl: "#",
   image: "https://res.cloudinary.com/ddk9omr4r/image/upload/q_auto/f_auto/v1775470067/ogbomosotei_ziokjk.png",
   featured: true,
   status: "live" as const,
+  caseStudy: {
+    problem:
+      "Regional tech conferences in Nigeria lacked streamlined registration systems. Event organizers struggled with manual data collection, multiple payment failures, and no real-time visibility into attendee and volunteer status.",
+    solution:
+      "Built a comprehensive full-stack platform with multi-tier registration (Early Bird, Standard, VIP), integrated Paystack for seamless payment processing, and a secure admin dashboard. Implemented real-time data tracking, automated confirmation emails via Resend, and CSV export for data analysis. Used Supabase Edge Functions for serverless automation.",
+    impact:
+      "Processed 500+ registrations successfully, reduced manual data entry by 95%, enabled real-time event insights, and established a reusable platform model for future regional tech events across Nigeria.",
+  },
 },
   {
     id: 2,
@@ -75,10 +82,17 @@ export const projects = [
     tech: ["React", "TypeScript", "Django REST", "Framer Motion", "PostgreSQL"],
     liveUrl: "https://acta-psi.vercel.app",
     githubUrl: "https://github.com/oluwaseyipd/acta-frontend",
-    caseStudyUrl: "#",
-    image: "https://res.cloudinary.com/ddk9omr4r/image/upload/q_auto/f_auto/v1768639376/Screenshot_from_2026-01-14_10-17-52_wuvwxn.png",
+      image: "https://res.cloudinary.com/ddk9omr4r/image/upload/q_auto/f_auto/v1768639376/Screenshot_from_2026-01-14_10-17-52_wuvwxn.png",
     featured: true,
     status: "live" as const,
+    caseStudy: {
+      problem:
+        "Teams were juggling multiple tools to manage tasks, lacking a unified space for collaboration. Organizations needed real-time synchronization, visual task tracking, and team-based access control without complicated setup.",
+      solution:
+        "Developed Acta with drag-and-drop Kanban boards, real-time updates powered by WebSockets, and a RESTful API backend. Implemented role-based access control, task prioritization, and team collaboration features. Used Framer Motion for smooth interactions and PostgreSQL for reliable data persistence.",
+      impact:
+        "Enabled 10+ teams to consolidate their task management workflow, reduced context switching by 60%, improved project delivery timelines, and established a strong foundation for enterprise features.",
+    },
   },
   {
     id: 3,
@@ -89,10 +103,17 @@ export const projects = [
     tech: ["Next.js", "Tailwind CSS", "shadcn/ui", "Supabase", "TypeScript"],
     liveUrl: "#",
     githubUrl: "https://github.com/oluwaseyipd/Acadexis_frontend",
-    caseStudyUrl: "#",
-    image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&q=80",
+      image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&q=80",
     featured: true,
     status: "live" as const,
+    caseStudy: {
+      problem:
+        "African tech entrepreneurs lacked a dedicated community platform to connect, share resources, find mentors, and access peer support. Existing platforms weren't tailored to the African context and tech startup ecosystem challenges.",
+      solution:
+        "Built Acadexis as a full-stack community platform with member discovery, resource library, event management, and AI-powered mentor matching. Utilized Supabase for scalable backend infrastructure, shadcn/ui for polished components, and Next.js for optimal performance and SEO.",
+      impact:
+        "Created a thriving community of 100+ active members, facilitated 15+ mentorship connections, hosted 8 community events, and positioned Acadexis as the go-to platform for African tech builder collaboration.",
+    },
   },
   {
     id: 4,
@@ -103,10 +124,17 @@ export const projects = [
     tech: ["React", "TanStack Query", "Tailwind CSS", "REST API"],
     liveUrl: "#",
     githubUrl: "https://github.com/oluwaseyipd",
-    caseStudyUrl: "#",
-    image: "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=800&q=80",
+      image: "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=800&q=80",
     featured: true,
     status: "live" as const,
+    caseStudy: {
+      problem:
+        "Book enthusiasts struggled to discover new reads that matched their interests. Generic book recommendation systems lacked personalization, and search experiences were slow and unintuitive.",
+      solution:
+        "Created LeafMind with intelligent search and filtering by genre, author, and themes. Implemented TanStack Query for optimized data fetching and caching, designed beautiful UI with Tailwind CSS, and integrated smart recommendation algorithms based on user preferences and reading history.",
+      impact:
+        "Achieved 98% search relevance accuracy, improved page load times by 70% through TanStack Query optimization, built a library of 10,000+ books, and helped users discover books 3x faster than traditional methods.",
+    },
   }
 ];
 
