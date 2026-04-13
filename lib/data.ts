@@ -3,7 +3,7 @@ export const siteConfig = {
   handle: "@oluwaseyipd",
   title: "React & Next.js Specialist • Full-Stack Engineer (Django)",
   bio: "ALX Certified Software Engineer crafting exceptional digital experiences with React, Next.js, TypeScript & Django. Based in Ogbomoso, Nigeria.",
-  longBio: `I'm Abiola John Oluwaseyi — a passionate software engineer dedicated to building elegant, performant, and accessible digital products. My journey in tech is rooted in two core values: Holiness & Excellence. I believe that great software is not just functional — it's purposeful, crafted with care, and serves real people effectively.
+  longBio: `I'm Abiola John Oluwaseyi, a software engineer dedicated to building elegant, performant, and accessible digital products. My journey in tech is rooted in two core values: Holiness & Excellence. I believe that great software is not just functional — it's purposeful, crafted with care, and serves real people effectively.
 
 With expertise in React, Next.js, TypeScript on the frontend, and Django & Django REST Framework on the backend, I deliver end-to-end solutions that are both beautiful and robust. I'm the founder of Thrive_Links, a community platform for African tech builders — because I believe in lifting others as I climb.
 
