@@ -1,18 +1,20 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Award, Briefcase, Lightbulb, Quote } from "lucide-react";
+import { Award, Briefcase, Lightbulb, Quote, HandHelping } from "lucide-react";
 import { experience, testimonials } from "@/lib/data";
 
 const typeIcon = {
   certification: <Award size={16} />,
   work: <Briefcase size={16} />,
+  volunteer: <HandHelping size={16} />,
   project: <Lightbulb size={16} />,
 };
 
 const typeColor = {
   certification: "var(--accent)",
   work: "var(--accent-secondary)",
+  volunteer: "#34d399",
   project: "#f59e0b",
 };
 

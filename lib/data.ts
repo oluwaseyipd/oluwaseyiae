@@ -141,6 +141,15 @@ export const projects = [
 export const experience = [
   {
     id: 1,
+    title: "ALX Software Engineering Mentorship",
+    org: "ALX Africa",
+    period: "Sept 2025 - Feb 2026",
+    description:
+      "Served as a mentor for the ALX Software Engineering program, guiding aspiring developers through complex coding challenges, project development, and career advice. Provided personalized feedback and support to help mentees excel in their software engineering journey.",
+    type: "volunteer" as const,
+  },
+  {
+    id: 2,
     title: "ALX Software Engineering Certification",
     org: "ALX Africa",
     period: "Sept 2025",
@@ -149,7 +158,7 @@ export const experience = [
     type: "certification" as const,
   },
   {
-    id: 2,
+    id: 3,
     title: "Freelance Full-Stack Engineer",
     org: "Independent",
     period: "2025 – Present",
@@ -158,12 +167,12 @@ export const experience = [
     type: "work" as const,
   },
   {
-    id: 3,
-    title: "Founder — Thrive_Links",
-    org: "Thrive_Links Community",
-    period: "2025 – Present",
+    id: 4,
+    title: "Founder",
+    org: "Thrive Links Community",
+    period: "2024 – Present",
     description:
-      "Building a full-stack community platform designed to empower and connect African tech builders. Leading design, development, and community strategy.",
+      "Building a community focused on empowering and connecting African tech builders. Leading design, development, and community strategy.",
     type: "project" as const,
   },
 ];

@@ -3,7 +3,7 @@
 // 2. Solution
 // 3. IMPACT
 import { motion } from "framer-motion";
-import { ExternalLink, BookOpen, Github, X } from "lucide-react";
+import { X } from "lucide-react";
 import { projects } from "../lib/data";
 
 interface StudyCaseProps {
@@ -67,9 +67,10 @@ export default function StudyCase({ projectId, onClose }: StudyCaseProps) {
         animate={{ scale: 1, opacity: 1 }}
         exit={{ scale: 0.8, opacity: 0 }}
         transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+        className="rounded-l-[1.5rem] md:rounded-[1.5rem]"
         style={{
           background: "var(--surface)",
-          borderRadius: "1.5rem",
+        //   borderRadius: "1.5rem",
           padding: "2.5rem",
           maxWidth: "700px",
           width: "90%",
@@ -255,95 +256,6 @@ export default function StudyCase({ projectId, onClose }: StudyCaseProps) {
           >
             {project.caseStudy.impact}
           </p>
-        </motion.div>
-
-        {/* Action Links */}
-        <motion.div
-          custom={3}
-          initial="hidden"
-          animate="visible"
-          variants={sectionVariants}
-          style={{
-            display: "flex",
-            gap: "1rem",
-            flexWrap: "wrap",
-            borderTop: "1px solid var(--border)",
-            paddingTop: "1.5rem",
-          }}
-        >
-          <motion.a
-            href={project.liveUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            whileHover={{ scale: 1.04 }}
-            whileTap={{ scale: 0.97 }}
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: "0.5rem",
-              textDecoration: "none",
-              color: "var(--accent)",
-              fontSize: "0.9rem",
-              fontWeight: 500,
-              padding: "0.75rem 1.25rem",
-              border: "1px solid var(--accent)",
-              borderRadius: "0.5rem",
-              transition: "all 300ms",
-              flex: 1,
-              justifyContent: "center",
-              minWidth: "150px",
-            }}
-            onMouseEnter={(e) => {
-              const el = e.currentTarget as HTMLAnchorElement;
-              el.style.background = "var(--accent)";
-              el.style.color = "var(--background)";
-            }}
-            onMouseLeave={(e) => {
-              const el = e.currentTarget as HTMLAnchorElement;
-              el.style.background = "transparent";
-              el.style.color = "var(--accent)";
-            }}
-          >
-            <ExternalLink size={16} />
-            View Live
-          </motion.a>
-
-          <motion.a
-            href={project.githubUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            whileHover={{ scale: 1.04 }}
-            whileTap={{ scale: 0.97 }}
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: "0.5rem",
-              textDecoration: "none",
-              color: "var(--text-secondary)",
-              fontSize: "0.9rem",
-              fontWeight: 500,
-              padding: "0.75rem 1.25rem",
-              border: "1px solid var(--border)",
-              borderRadius: "0.5rem",
-              transition: "all 300ms",
-              flex: 1,
-              justifyContent: "center",
-              minWidth: "150px",
-            }}
-            onMouseEnter={(e) => {
-              const el = e.currentTarget as HTMLAnchorElement;
-              el.style.background = "var(--surface-hover)";
-              el.style.color = "var(--text-primary)";
-            }}
-            onMouseLeave={(e) => {
-              const el = e.currentTarget as HTMLAnchorElement;
-              el.style.background = "transparent";
-              el.style.color = "var(--text-secondary)";
-            }}
-          >
-            <Github size={16} />
-            View Code
-          </motion.a>
         </motion.div>
       </motion.div>
     </motion.div>
