@@ -372,9 +372,6 @@ export function Hero() {
         onClick={() => document.getElementById("about")?.scrollIntoView({ behavior: "smooth" })}
         aria-label="Scroll to about section"
       >
-        <span style={{ fontSize: "0.7rem", letterSpacing: "0.15em", textTransform: "uppercase" }}>
-          Scroll
-        </span>
         <motion.div
           animate={{ y: [0, 6, 0] }}
           transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}

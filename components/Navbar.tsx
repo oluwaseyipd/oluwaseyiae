@@ -37,7 +37,12 @@ export function Navbar() {
   const handleNavClick = (href: string) => {
     setMobileOpen(false);
     const id = href.slice(1);
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    } else {
+      window.location.href = `/${href}`;
+    }
   };
 
   return (

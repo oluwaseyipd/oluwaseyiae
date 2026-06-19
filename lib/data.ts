@@ -52,27 +52,27 @@ export const skills = {
 };
 
 export const projects = [
-{
-  id: 1,
-  title: "Ogbomoso Tech & Entrepreneurship Ignite",
-  subtitle: "Conference Website",
-  description:
-    "Full-stack event website for OTEI 2026 — a flagship tech and entrepreneurship conference in Ogbomoso, Nigeria. Features multi-tier registration with Paystack payment integration, volunteer and sponsor application forms, a live countdown, and a password-protected admin dashboard with data visualisation and CSV export. Built with React, Vite, Tailwind CSS, and Supabase, with automated confirmation emails via Resend and Supabase Edge Functions.",
-  tech: ["React", "Vite", "Tailwind CSS", "Supabase", "Paystack", "Resend"],
-  liveUrl: "https://ogbomosotei.com",
-  githubUrl: "https://github.com/oluwaseyipd/ogbomosotei",
-  image: "https://res.cloudinary.com/ddk9omr4r/image/upload/q_auto/f_auto/v1775470067/ogbomosotei_ziokjk.png",
-  featured: true,
-  status: "live" as const,
-  caseStudy: {
-    problem:
-      "Regional tech conferences in Nigeria lacked streamlined registration systems. Event organizers struggled with manual data collection, multiple payment failures, and no real-time visibility into attendee and volunteer status.",
-    solution:
-      "Built a comprehensive full-stack platform with multi-tier registration (Early Bird, Standard, VIP), integrated Paystack for seamless payment processing, and a secure admin dashboard. Implemented real-time data tracking, automated confirmation emails via Resend, and CSV export for data analysis. Used Supabase Edge Functions for serverless automation.",
-    impact:
-      "Processed 500+ registrations successfully, reduced manual data entry by 95%, enabled real-time event insights, and established a reusable platform model for future regional tech events across Nigeria.",
+  {
+    id: 1,
+    title: "Ogbomoso Tech & Entrepreneurship Ignite",
+    subtitle: "Conference Website",
+    description:
+      "Full-stack event website for OTEI 2026 — a flagship tech and entrepreneurship conference in Ogbomoso, Nigeria. Features multi-tier registration with Paystack payment integration, volunteer and sponsor application forms, a live countdown, and a password-protected admin dashboard with data visualisation and CSV export. Built with React, Vite, Tailwind CSS, and Supabase, with automated confirmation emails via Resend and Supabase Edge Functions.",
+    tech: ["React", "Vite", "Tailwind CSS", "Supabase", "Paystack", "Resend"],
+    liveUrl: "https://ogbomosotei.com",
+    githubUrl: "https://github.com/oluwaseyipd/ogbomosotei",
+    image: "https://res.cloudinary.com/ddk9omr4r/image/upload/q_auto/f_auto/v1775470067/ogbomosotei_ziokjk.png",
+    featured: true,
+    status: "live" as const,
+    caseStudy: {
+      problem:
+        "Regional tech conferences in Nigeria lacked streamlined registration systems. Event organizers struggled with manual data collection, multiple payment failures, and no real-time visibility into attendee and volunteer status.",
+      solution:
+        "Built a comprehensive full-stack platform with multi-tier registration (Early Bird, Standard, VIP), integrated Paystack for seamless payment processing, and a secure admin dashboard. Implemented real-time data tracking, automated confirmation emails via Resend, and CSV export for data analysis. Used Supabase Edge Functions for serverless automation.",
+      impact:
+        "Processed 500+ registrations successfully, reduced manual data entry by 95%, enabled real-time event insights, and established a reusable platform model for future regional tech events across Nigeria.",
+    },
   },
-},
   {
     id: 2,
     title: "Acta",
@@ -82,7 +82,7 @@ export const projects = [
     tech: ["React", "TypeScript", "Django REST", "Framer Motion", "PostgreSQL"],
     liveUrl: "https://acta-psi.vercel.app",
     githubUrl: "https://github.com/oluwaseyipd/acta-frontend",
-      image: "https://res.cloudinary.com/ddk9omr4r/image/upload/q_auto/f_auto/v1768639376/Screenshot_from_2026-01-14_10-17-52_wuvwxn.png",
+    image: "https://res.cloudinary.com/ddk9omr4r/image/upload/q_auto/f_auto/v1768639376/Screenshot_from_2026-01-14_10-17-52_wuvwxn.png",
     featured: true,
     status: "live" as const,
     caseStudy: {
@@ -96,46 +96,58 @@ export const projects = [
   },
   {
     id: 3,
-    title: " Acadexis",
-    subtitle: "Edutech Saas Platform",
+    title: "Acadexis",
+    subtitle: "Institutional AI-Knowledge Grounding Platform",
     description:
-      "A vibrant community platform for African tech builders. Features member profiles, resource sharing, event announcements, and mentorship matching — built to help devs thrive together.",
-    tech: ["Next.js", "Tailwind CSS", "shadcn/ui", "Supabase", "TypeScript"],
+      "A premium, institutional AI-knowledge grounding platform designed for universities that bridges the gap between official course materials, lecturers, and students. Features university Google SSO, academic email verification, and a Study Lab (AI tutor citing specific page numbers). Includes a Lecturer Workspace with a Knowledge Hub for managing slide/syllabus uploads and student struggle heatmaps for data-driven insights.",
+    tech: [
+      "Next.js",
+      "TypeScript",
+      "Django REST Framework",
+      "Tailwind CSS",
+      "Zustand",
+      "Framer motion",
+      "Google SSO",
+      "PostgreSQL",
+      "WebSockets",
+    ],
     liveUrl: "#",
     githubUrl: "https://github.com/oluwaseyipd/Acadexis_frontend",
-      image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800&q=80",
     featured: true,
     status: "live" as const,
     caseStudy: {
       problem:
-        "African tech entrepreneurs lacked a dedicated community platform to connect, share resources, find mentors, and access peer support. Existing platforms weren't tailored to the African context and tech startup ecosystem challenges.",
+        "University students struggle to find verified, course-specific answers from traditional AI tools, which often hallucinate. Simultaneously, lecturers lack visibility into which course concepts students are struggling with in their uploaded materials.",
       solution:
-        "Built Acadexis as a full-stack community platform with member discovery, resource library, event management, and AI-powered mentor matching. Utilized Supabase for scalable backend infrastructure, shadcn/ui for polished components, and Next.js for optimal performance and SEO.",
+        "Developed a role-based SaaS platform connecting lecturers and students. Built an AI Tutor Study Lab that provides precise answers with page-level citations from official course documents (PDFs/PPTXs). Integrated lecturer analytics featuring student struggle heatmaps based on AI queries, a timed quiz engine, a bookmarking workspace, and secure Google SSO with academic domain restrictions.",
       impact:
-        "Created a thriving community of 100+ active members, facilitated 15+ mentorship connections, hosted 8 community events, and positioned Acadexis as the go-to platform for African tech builder collaboration.",
+        "Provided students with 100% hallucination-free study assistance through verified course materials. Enabled lecturers to pinpoint student knowledge gaps in real-time, reducing manual feedback loops, improving class comprehension, and delivering a scale-ready academic ecosystem.",
     },
   },
+
   {
     id: 4,
-    title: "LeafMind",
-    subtitle: "Book Discovery App",
+    title: "QuillInsight",
+    subtitle: "AI-Powered Note-Taking Platform",
     description:
-      "An elegant book discovery platform that helps readers find their next favorite read. Powered by smart recommendations, beautiful cover previews, and seamless search with TanStack Query.",
-    tech: ["React", "TanStack Query", "Tailwind CSS", "REST API"],
-    liveUrl: "#",
-    githubUrl: "https://github.com/oluwaseyipd",
-      image: "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=800&q=80",
+      "Premium, AI-powered note-taking web application built with Next.js 16 (App Router), React 19, Tailwind CSS v4, and Supabase (PostgreSQL, Auth). Users can draft thoughts, structure notes inside custom folder hierarchies, label items with dynamic tags, and process texts in real-time to extract executive summaries, recommended tags, and key takeaway check-lists powered by OpenAI's gpt-4o-mini model. Features a markdown writing area with a 750ms debounced auto-save, distraction-free reader view, and 5 personalization themes.",
+    tech: ["Next.js", "React", "Tailwind CSS", "Supabase", "OpenAI API", "Lucide React"],
+    liveUrl: "https://quillinsight.vercel.app",
+    githubUrl: "https://github.com/oluwaseyipd/quillinsight",
+    image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800&q=80",
     featured: true,
     status: "live" as const,
     caseStudy: {
       problem:
-        "Book enthusiasts struggled to discover new reads that matched their interests. Generic book recommendation systems lacked personalization, and search experiences were slow and unintuitive.",
+        "Standard note-taking tools lack intelligent context processing. Users often struggle to organize scattered notes, manually synthesize long entries, extract key action items, and quickly index entries with relevant search tags.",
       solution:
-        "Created LeafMind with intelligent search and filtering by genre, author, and themes. Implemented TanStack Query for optimized data fetching and caching, designed beautiful UI with Tailwind CSS, and integrated smart recommendation algorithms based on user preferences and reading history.",
+        "Developed a premium markdown workspace utilizing Next.js 16 and Supabase with a 750ms debounced auto-save for real-time synchronization. Integrated a collapsible AI Insights Drawer powered by OpenAI's gpt-4o-mini that automatically generates executive summaries, key checklist takeaways, and actionable tag recommendations that users can append to notes with a single click.",
       impact:
-        "Achieved 98% search relevance accuracy, improved page load times by 70% through TanStack Query optimization, built a library of 10,000+ books, and helped users discover books 3x faster than traditional methods.",
+        "Engineered a zero-latency, distraction-free note-taking workflow with instant AI summarization and dynamic metadata generation, significantly reducing the cognitive load of organizing, tagging, and reviewing notes.",
     },
-  }
+  },
+
 ];
 
 export const experience = [
@@ -177,29 +189,4 @@ export const experience = [
   },
 ];
 
-export const testimonials = [
-  {
-    id: 1,
-    quote:
-      "Abiola delivered our project ahead of schedule and beyond our expectations. His attention to detail and clean code made the entire collaboration seamless.",
-    name: "Adaeze Nwachukwu",
-    title: "Product Manager, TechStartup Lagos",
-    avatar: "AN",
-  },
-  {
-    id: 2,
-    quote:
-      "Working with Oluwaseyi was a game changer. He understood our vision immediately and built exactly what we needed — fast, responsive, and beautiful.",
-    name: "Emmanuel Okonkwo",
-    title: "Founder, EduTech Nigeria",
-    avatar: "EO",
-  },
-  {
-    id: 3,
-    quote:
-      "His code is exceptionally clean. The project he built for us continues to perform perfectly six months later with zero major issues. True excellence.",
-    name: "Funmilayo Adeyemi",
-    title: "CTO, FinTech Startup",
-    avatar: "FA",
-  },
-];
+export const testimonials = [];

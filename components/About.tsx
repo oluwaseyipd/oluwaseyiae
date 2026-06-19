@@ -9,7 +9,7 @@ const fadeUp = {
   visible: (i: number = 0) => ({
     opacity: 1,
     y: 0,
-    transition: { duration: 0.6, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] as const},
+    transition: { duration: 0.6, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] as const },
   }),
 };
 
@@ -154,6 +154,27 @@ export function About() {
             transition={{ duration: 0.7, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
             style={{ order: 2 }}
           >
+
+            {/* Bio paragraphs */}
+            {siteConfig.longBio.split("\n\n").map((para, i) => (
+              <motion.p
+                key={i}
+                custom={i}
+                variants={fadeUp}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                style={{
+                  color: "var(--text-secondary)",
+                  lineHeight: 1.8,
+                  fontSize: "1rem",
+                  marginBottom: "1.25rem",
+                }}
+              >
+                {para}
+              </motion.p>
+            ))}
+
             {/* Values */}
             <div
               style={{
@@ -186,26 +207,6 @@ export function About() {
               ))}
             </div>
 
-            {/* Bio paragraphs */}
-            {siteConfig.longBio.split("\n\n").map((para, i) => (
-              <motion.p
-                key={i}
-                custom={i}
-                variants={fadeUp}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                style={{
-                  color: "var(--text-secondary)",
-                  lineHeight: 1.8,
-                  fontSize: "1rem",
-                  marginBottom: "1.25rem",
-                }}
-              >
-                {para}
-              </motion.p>
-            ))}
-
             {/* Quick stats */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -222,7 +223,7 @@ export function About() {
               }}
             >
               {[
-                { value: "4+", label: "Projects Shipped" },
+                { value: "5+", label: "Projects Shipped" },
                 { value: "2+", label: "Years Building" },
                 { value: "100%", label: "Passion Level" },
               ].map((stat) => (

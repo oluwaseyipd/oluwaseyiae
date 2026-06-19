@@ -160,9 +160,23 @@ export function Footer() {
             gap: "1rem",
           }}
         >
-          <p style={{ fontSize: "0.8rem", color: "var(--text-secondary)" }}>
+          <p style={{ fontSize: "0.8rem", color: "var(--text-secondary)", margin: 0 }}>
             © {year} {siteConfig.name}. All rights reserved.
           </p>
+          <a
+            href="/feedback"
+            style={{
+              fontSize: "0.8rem",
+              color: "var(--accent)",
+              textDecoration: "none",
+              fontWeight: 600,
+              transition: "opacity 200ms",
+            }}
+            onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.8")}
+            onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
+          >
+            Worked with me? Leave Feedback
+          </a>
         </div>
       </div>
     </footer>
