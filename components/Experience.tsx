@@ -296,7 +296,7 @@ export function Experience() {
     };
     handleResize();
     window.addEventListener("resize", handleResize);
-    
+
     // Fetch live testimonials
     async function loadTestimonials() {
       try {
@@ -334,7 +334,7 @@ export function Experience() {
         setDisplayTestimonials([]);
       }
     }
-    
+
     loadTestimonials();
     return () => window.removeEventListener("resize", handleResize);
   }, []);
@@ -342,7 +342,7 @@ export function Experience() {
   // Desktop/Mobile Autoplay Slider loop
   useEffect(() => {
     if (displayTestimonials.length <= 1 || isHovered) return;
-    
+
     // On desktop screen (non-mobile), only run the slider loop if testimonials exceed 3
     if (!isMobile && displayTestimonials.length <= 3) return;
 
@@ -516,8 +516,8 @@ export function Experience() {
                 style={{
                   padding: "2.5rem 2rem",
                   borderRadius: "1.25rem",
-                  background: "rgba(15, 23, 42, 0.4)",
-                  border: "1px solid var(--border)",
+                  background: "transparent",
+                  border: "1px dashed var(--border)",
                   textAlign: "center",
                   display: "flex",
                   flexDirection: "column",

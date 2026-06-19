@@ -253,3 +253,10 @@ body {
   opacity: 1;
   transform: none;
 }
+
+/* ---- Input placeholders ---- */
+input::placeholder,
+textarea::placeholder {
+  color: var(--text-secondary);
+  opacity: 0.6;
+}

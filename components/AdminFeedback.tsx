@@ -302,7 +302,7 @@ export default function AdminFeedback() {
                   padding: "0.85rem 3rem 0.85rem 1rem",
                   borderRadius: "0.75rem",
                   border: "1px solid var(--border)",
-                  background: "rgba(2, 6, 23, 0.4)",
+                  background: "var(--background)",
                   color: "var(--text-primary)",
                   fontSize: "0.95rem",
                   boxSizing: "border-box"
@@ -452,7 +452,7 @@ export default function AdminFeedback() {
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "1.5rem", marginBottom: "2rem", borderBottom: "1px solid var(--border)", paddingBottom: "1.5rem" }}>
           
           {/* Filter Tabs */}
-          <div style={{ display: "flex", gap: "0.5rem", background: "rgba(15,23,42,0.4)", padding: "0.35rem", borderRadius: "0.75rem", border: "1px solid var(--border)" }}>
+          <div style={{ display: "flex", gap: "0.5rem", background: "var(--background)", padding: "0.35rem", borderRadius: "0.75rem", border: "1px solid var(--border)" }}>
             {(["all", "pending", "approved"] as const).map((tab) => (
               <button
                 key={tab}
@@ -505,7 +505,7 @@ export default function AdminFeedback() {
             </motion.div>
           </div>
         ) : filteredFeedbacks.length === 0 ? (
-          <div style={{ textAlign: "center", padding: "5rem 2rem", background: "rgba(15,23,42,0.2)", borderRadius: "1.5rem", border: "1px dotted var(--border)" }}>
+          <div style={{ textAlign: "center", padding: "5rem 2rem", background: "transparent", borderRadius: "1.5rem", border: "1px dashed var(--border)" }}>
             <p style={{ color: "var(--text-secondary)", fontSize: "1rem" }}>
               No feedback entries match your query or selected filters.
             </p>
@@ -807,7 +807,7 @@ export default function AdminFeedback() {
                       name="name"
                       value={editFormData.name || ""}
                       onChange={handleEditInputChange}
-                      style={{ width: "100%", padding: "0.6rem", borderRadius: "0.5rem", border: "1px solid var(--border)", background: "rgba(2, 6, 23, 0.4)", color: "var(--text-primary)", boxSizing: "border-box" }}
+                      style={{ width: "100%", padding: "0.6rem", borderRadius: "0.5rem", border: "1px solid var(--border)", background: "var(--background)", color: "var(--text-primary)", boxSizing: "border-box" }}
                       required
                     />
                   </div>
@@ -820,7 +820,7 @@ export default function AdminFeedback() {
                       name="email"
                       value={editFormData.email || ""}
                       onChange={handleEditInputChange}
-                      style={{ width: "100%", padding: "0.6rem", borderRadius: "0.5rem", border: "1px solid var(--border)", background: "rgba(2, 6, 23, 0.4)", color: "var(--text-primary)", boxSizing: "border-box" }}
+                      style={{ width: "100%", padding: "0.6rem", borderRadius: "0.5rem", border: "1px solid var(--border)", background: "var(--background)", color: "var(--text-primary)", boxSizing: "border-box" }}
                       required
                     />
                   </div>
@@ -837,7 +837,7 @@ export default function AdminFeedback() {
                       name="role_title"
                       value={editFormData.role_title || ""}
                       onChange={handleEditInputChange}
-                      style={{ width: "100%", padding: "0.6rem", borderRadius: "0.5rem", border: "1px solid var(--border)", background: "rgba(2, 6, 23, 0.4)", color: "var(--text-primary)", boxSizing: "border-box" }}
+                      style={{ width: "100%", padding: "0.6rem", borderRadius: "0.5rem", border: "1px solid var(--border)", background: "var(--background)", color: "var(--text-primary)", boxSizing: "border-box" }}
                       required
                     />
                   </div>
@@ -850,7 +850,7 @@ export default function AdminFeedback() {
                       name="company"
                       value={editFormData.company || ""}
                       onChange={handleEditInputChange}
-                      style={{ width: "100%", padding: "0.6rem", borderRadius: "0.5rem", border: "1px solid var(--border)", background: "rgba(2, 6, 23, 0.4)", color: "var(--text-primary)", boxSizing: "border-box" }}
+                      style={{ width: "100%", padding: "0.6rem", borderRadius: "0.5rem", border: "1px solid var(--border)", background: "var(--background)", color: "var(--text-primary)", boxSizing: "border-box" }}
                       required
                     />
                   </div>
@@ -866,7 +866,7 @@ export default function AdminFeedback() {
                       name="project_type"
                       value={editFormData.project_type || ""}
                       onChange={handleEditInputChange}
-                      style={{ width: "100%", padding: "0.6rem", borderRadius: "0.5rem", border: "1px solid var(--border)", background: "rgba(2, 6, 23, 0.4)", color: "var(--text-primary)", cursor: "pointer", boxSizing: "border-box" }}
+                      style={{ width: "100%", padding: "0.6rem", borderRadius: "0.5rem", border: "1px solid var(--border)", background: "var(--background)", color: "var(--text-primary)", cursor: "pointer", boxSizing: "border-box" }}
                     >
                       <option value="Full-Stack Web App">Full-Stack Web App</option>
                       <option value="Frontend Development">Frontend Development</option>
@@ -884,7 +884,7 @@ export default function AdminFeedback() {
                       name="rating"
                       value={editFormData.rating || 5}
                       onChange={handleEditInputChange}
-                      style={{ width: "100%", padding: "0.6rem", borderRadius: "0.5rem", border: "1px solid var(--border)", background: "rgba(2, 6, 23, 0.4)", color: "var(--text-primary)", cursor: "pointer", boxSizing: "border-box" }}
+                      style={{ width: "100%", padding: "0.6rem", borderRadius: "0.5rem", border: "1px solid var(--border)", background: "var(--background)", color: "var(--text-primary)", cursor: "pointer", boxSizing: "border-box" }}
                     >
                       <option value={5}>⭐⭐⭐⭐⭐ 5 Stars</option>
                       <option value={4}>⭐⭐⭐⭐ 4 Stars</option>
@@ -906,7 +906,7 @@ export default function AdminFeedback() {
                     value={editFormData.linkedin_url || ""}
                     onChange={handleEditInputChange}
                     placeholder="https://linkedin.com/in/username"
-                    style={{ width: "100%", padding: "0.6rem", borderRadius: "0.5rem", border: "1px solid var(--border)", background: "rgba(2, 6, 23, 0.4)", color: "var(--text-primary)", boxSizing: "border-box" }}
+                    style={{ width: "100%", padding: "0.6rem", borderRadius: "0.5rem", border: "1px solid var(--border)", background: "var(--background)", color: "var(--text-primary)", boxSizing: "border-box" }}
                   />
                 </div>
 
@@ -920,7 +920,7 @@ export default function AdminFeedback() {
                     value={editFormData.valuable_part || ""}
                     onChange={handleEditInputChange}
                     rows={2}
-                    style={{ width: "100%", padding: "0.6rem", borderRadius: "0.5rem", border: "1px solid var(--border)", background: "rgba(2, 6, 23, 0.4)", color: "var(--text-primary)", fontFamily: "inherit", fontSize: "0.9rem", resize: "vertical", boxSizing: "border-box" }}
+                    style={{ width: "100%", padding: "0.6rem", borderRadius: "0.5rem", border: "1px solid var(--border)", background: "var(--background)", color: "var(--text-primary)", fontFamily: "inherit", fontSize: "0.9rem", resize: "vertical", boxSizing: "border-box" }}
                     required
                   />
                 </div>
@@ -935,7 +935,7 @@ export default function AdminFeedback() {
                     value={editFormData.feedback_text || ""}
                     onChange={handleEditInputChange}
                     rows={4}
-                    style={{ width: "100%", padding: "0.6rem", borderRadius: "0.5rem", border: "1px solid var(--border)", background: "rgba(2, 6, 23, 0.4)", color: "var(--text-primary)", fontFamily: "inherit", fontSize: "0.9rem", resize: "vertical", boxSizing: "border-box" }}
+                    style={{ width: "100%", padding: "0.6rem", borderRadius: "0.5rem", border: "1px solid var(--border)", background: "var(--background)", color: "var(--text-primary)", fontFamily: "inherit", fontSize: "0.9rem", resize: "vertical", boxSizing: "border-box" }}
                     required
                   />
                 </div>
