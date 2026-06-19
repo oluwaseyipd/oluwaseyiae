@@ -10,12 +10,10 @@ This portfolio showcases professional software engineering projects, experience,
 
 *Below are placeholders for the project screenshots. Replace the files at the specified paths to update the images:*
 
-<!-- PLACEHOLDER 1: Portfolio Home Page -->
-### 🌐 Portfolio Homepage
+### 🌐 Portfolio Home Page Screenshot (Light mode)
 ![Portfolio Home Page Screenshot (Light mode)](https://res.cloudinary.com/ddk9omr4r/image/upload/v1781858019/light-mode_mk3few.png)
 
-<!-- PLACEHOLDER 2: Feedback Admin Moderation Dashboard -->
-### 🔐 Feedback Admin Dashboard
+### 🌐 Portfolio Home Page Screenshot (Dark mode)
 ![Portfolio Home Page Screenshot (Dark mode)](https://res.cloudinary.com/ddk9omr4r/image/upload/v1781858019/dark-mode_yxt0x4.png)
 
 ---
