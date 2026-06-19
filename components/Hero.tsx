@@ -291,7 +291,7 @@ export function Hero() {
           </motion.button>
 
           <motion.a
-            href='/ABIOLA_JOHN_OLUWASEYI_FRONTEND_DEVELOPER.pdf'
+            href='/ABIOLA_JOHN_OLUWASEYI_FRONTEND_SOFTWARE_ENGINEER.pdf'
             target="_blank"
             rel="noopener noreferrer"
             whileHover={{ scale: 1.04, y: -2 }}
