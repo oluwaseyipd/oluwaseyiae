@@ -8,8 +8,6 @@ This portfolio showcases professional software engineering projects, experience,
 
 ## 📷 Visual Showcase
 
-*Below are placeholders for the project screenshots. Replace the files at the specified paths to update the images:*
-
 ### 🌐 Portfolio Home Page Screenshot (Light mode)
 ![Portfolio Home Page Screenshot (Light mode)](https://res.cloudinary.com/ddk9omr4r/image/upload/v1781858019/light-mode_mk3few.png)
 
