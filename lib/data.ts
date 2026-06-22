@@ -135,7 +135,7 @@ export const projects = [
     tech: ["Next.js", "React", "Tailwind CSS", "Supabase", "OpenAI API", "Lucide React"],
     liveUrl: "https://quillinsight.vercel.app",
     githubUrl: "https://github.com/oluwaseyipd/quillinsight",
-    image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800&q=80",
+    image: "https://res.cloudinary.com/ddk9omr4r/image/upload/v1782116598/quillinsight_qepfia.png",
     featured: true,
     status: "live" as const,
     caseStudy: {
