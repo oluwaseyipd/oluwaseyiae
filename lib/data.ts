@@ -80,7 +80,7 @@ export const projects = [
     description:
       "A powerful, full-stack task management application with real-time updates, drag-and-drop boards, and team collaboration features. Built with a React TypeScript frontend and Django REST API backend.",
     tech: ["React", "TypeScript", "Django REST", "Framer Motion", "PostgreSQL"],
-    liveUrl: "https://acta-psi.vercel.app",
+    liveUrl: "https://acta-hazel.vercel.app",
     githubUrl: "https://github.com/oluwaseyipd/acta-frontend",
     image: "https://res.cloudinary.com/ddk9omr4r/image/upload/q_auto/f_auto/v1768639376/Screenshot_from_2026-01-14_10-17-52_wuvwxn.png",
     featured: true,
@@ -111,7 +111,7 @@ export const projects = [
       "PostgreSQL",
       "WebSockets",
     ],
-    liveUrl: "#",
+    liveUrl: "https://studywithacadexis.vercel.app",
     githubUrl: "https://github.com/oluwaseyipd/Acadexis_frontend",
     image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800&q=80",
     featured: true,
