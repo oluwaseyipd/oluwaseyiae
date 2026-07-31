@@ -33,5 +33,6 @@ export async function fetchFromSupabase<T>(
     throw new Error(`Supabase API error: ${response.status} ${response.statusText} - ${errorText}`);
   }
 
-  return response.json();
+  const text = await response.text();
+  return text ? JSON.parse(text) : [];
 }
