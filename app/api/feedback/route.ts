@@ -21,7 +21,14 @@ export async function GET(request: Request) {
       ? "feedbacks?order=created_at.desc"
       : "feedbacks?approved=eq.true&allow_public_display=eq.true&order=created_at.desc";
 
-    const feedbacks = await fetchFromSupabase<any>(queryPath);
+    const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+    const headers: Record<string, string> = {};
+    if (isAdmin && serviceRoleKey) {
+      headers["apikey"] = serviceRoleKey;
+      headers["Authorization"] = `Bearer ${serviceRoleKey}`;
+    }
+
+    const feedbacks = await fetchFromSupabase<any>(queryPath, { headers });
 
     return NextResponse.json({
       success: true,
@@ -178,12 +185,19 @@ export async function PUT(request: Request) {
       Object.entries(updateData).filter(([_, v]) => v !== undefined)
     );
 
+    const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+    const headers: Record<string, string> = {
+      "Prefer": "return=minimal"
+    };
+    if (serviceRoleKey) {
+      headers["apikey"] = serviceRoleKey;
+      headers["Authorization"] = `Bearer ${serviceRoleKey}`;
+    }
+
     // In PostgREST, updates are done via PATCH requests targeting the ID
     await fetchFromSupabase<any>(`feedbacks?id=eq.${id}`, {
       method: "PATCH",
-      headers: {
-        "Prefer": "return=minimal"
-      },
+      headers,
       body: JSON.stringify(cleanData)
     });
 
@@ -219,12 +233,19 @@ export async function DELETE(request: Request) {
       return NextResponse.json({ success: false, message: "Feedback ID is required" }, { status: 400 });
     }
 
+    const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+    const headers: Record<string, string> = {
+      "Prefer": "return=minimal"
+    };
+    if (serviceRoleKey) {
+      headers["apikey"] = serviceRoleKey;
+      headers["Authorization"] = `Bearer ${serviceRoleKey}`;
+    }
+
     // In PostgREST, deletes are done via DELETE requests targeting the ID
     await fetchFromSupabase<any>(`feedbacks?id=eq.${id}`, {
       method: "DELETE",
-      headers: {
-        "Prefer": "return=minimal"
-      }
+      headers
     });
 
     return NextResponse.json({
