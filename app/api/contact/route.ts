@@ -4,7 +4,7 @@ import { siteConfig } from "@/lib/data";
 
 export async function POST(request: Request) {
   try {
-    const apiKey = process.env.RESEND_API_KEY;
+    const apiKey = process.env.RESEND_API_KEY?.trim().replace(/^["']|["']$/g, "").trim();
 
     if (!apiKey) {
       console.error("RESEND_API_KEY is not configured in environment variables.");
@@ -50,9 +50,8 @@ export async function POST(request: Request) {
 
     const resend = new Resend(apiKey);
 
-    const recipientEmail = process.env.CONTACT_EMAIL || siteConfig.email;
-    const fromSender =
-      process.env.RESEND_FROM_EMAIL || "Portfolio Contact <onboarding@resend.dev>";
+    const recipientEmail = getRecipientEmail();
+    const fromSender = getFromSender();
     const emailSubject = trimmedSubject
       ? `[Portfolio Contact] ${trimmedSubject}`
       : `[Portfolio Contact] New message from ${trimmedName}`;
@@ -158,3 +157,30 @@ function escapeHtml(text: string): string {
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#039;");
 }
+
+function getFromSender(): string {
+  const rawFrom = process.env.RESEND_FROM_EMAIL?.trim().replace(/^["']|["']$/g, "").trim();
+
+  if (!rawFrom) {
+    return "Portfolio Contact <onboarding@resend.dev>";
+  }
+
+  // If user only provided a name without an email address (e.g. "Abiola John")
+  if (!rawFrom.includes("@")) {
+    return `${rawFrom} <onboarding@resend.dev>`;
+  }
+
+  // If user provided a raw email address without name (e.g. "onboarding@resend.dev")
+  if (!rawFrom.includes("<") && rawFrom.includes("@")) {
+    return `Portfolio Contact <${rawFrom}>`;
+  }
+
+  // If user provided standard format "Name <email@domain.com>"
+  return rawFrom;
+}
+
+function getRecipientEmail(): string {
+  const rawTo = process.env.CONTACT_EMAIL?.trim().replace(/^["']|["']$/g, "").trim();
+  return rawTo || siteConfig.email || "oluwaseyiae@gmail.com";
+}
+
