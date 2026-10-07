@@ -1,8 +1,10 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { Handshake, ExternalLink, Twitter, Github, Mail } from "lucide-react";
 import { siteConfig } from "@/lib/data";
+import { ResumeModal } from "@/components/ResumeModal";
 
 // Floating geometric shape component
 function FloatingShape({
@@ -90,231 +92,240 @@ const codeTokens = [
 ];
 
 export function Hero() {
+  const [isResumeOpen, setIsResumeOpen] = useState(false);
+
   const scrollToProjects = () => {
     document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
-    <section
-      id="home"
-      style={{
-        position: "relative",
-        minHeight: "100dvh",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        overflow: "hidden",
-        padding: "6rem 1.5rem 4rem",
-      }}
-    >
-      {/* Background dot grid */}
-      <div
-        style={{
-          position: "absolute",
-          inset: 0,
-          backgroundImage: "radial-gradient(circle, var(--border) 1px, transparent 1px)",
-          backgroundSize: "32px 32px",
-          opacity: 0.4,
-        }}
-      />
-
-      {/* Radial gradient spotlight */}
-      <div
-        style={{
-          position: "absolute",
-          top: "50%",
-          left: "50%",
-          transform: "translate(-50%, -50%)",
-          width: "700px",
-          height: "700px",
-          background:
-            "radial-gradient(circle, rgba(34,211,238,0.08) 0%, transparent 70%)",
-          pointerEvents: "none",
-        }}
-      />
-
-      {/* Floating shapes */}
-      <FloatingShape
-        style={{ width: "300px", height: "300px", left: "-80px", top: "10%", opacity: 0.05 }}
-        delay={0}
-      />
-      <FloatingShape
-        style={{ width: "200px", height: "200px", right: "-50px", bottom: "15%", opacity: 0.07 }}
-        delay={4}
-      />
-      <FloatingShape
-        style={{ width: "150px", height: "150px", right: "15%", top: "15%", opacity: 0.05 }}
-        delay={2}
-      />
-
-      {/* Floating code tokens */}
-      {codeTokens.map((token, i) => (
-        <CodeToken key={i} style={token.style} delay={token.delay}>
-          {token.text}
-        </CodeToken>
-      ))}
-
-      {/* Main content */}
-      <div
+    <>
+      <section
+        id="home"
         style={{
           position: "relative",
-          zIndex: 1,
-          maxWidth: "800px",
-          width: "100%",
-          textAlign: "center",
+          minHeight: "100dvh",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          overflow: "hidden",
+          padding: "6rem 1.5rem 4rem",
         }}
       >
-
-        {/* Greeting */}
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.1 }}
+        {/* Background dot grid */}
+        <div
           style={{
-            fontSize: "1.1rem",
-            color: "var(--text-secondary)",
-            marginBottom: "0.5rem",
-            fontWeight: 400,
+            position: "absolute",
+            inset: 0,
+            backgroundImage: "radial-gradient(circle, var(--border) 1px, transparent 1px)",
+            backgroundSize: "32px 32px",
+            opacity: 0.4,
+          }}
+        />
+
+        {/* Radial gradient spotlight */}
+        <div
+          style={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            width: "700px",
+            height: "700px",
+            background:
+              "radial-gradient(circle, rgba(34,211,238,0.08) 0%, transparent 70%)",
+            pointerEvents: "none",
+          }}
+        />
+
+        {/* Floating shapes */}
+        <FloatingShape
+          style={{ width: "300px", height: "300px", left: "-80px", top: "10%", opacity: 0.05 }}
+          delay={0}
+        />
+        <FloatingShape
+          style={{ width: "200px", height: "200px", right: "-50px", bottom: "15%", opacity: 0.07 }}
+          delay={4}
+        />
+        <FloatingShape
+          style={{ width: "150px", height: "150px", right: "15%", top: "15%", opacity: 0.05 }}
+          delay={2}
+        />
+
+        {/* Floating code tokens */}
+        {codeTokens.map((token, i) => (
+          <CodeToken key={i} style={token.style} delay={token.delay}>
+            {token.text}
+          </CodeToken>
+        ))}
+
+        {/* Main content */}
+        <div
+          style={{
+            position: "relative",
+            zIndex: 1,
+            maxWidth: "800px",
+            width: "100%",
+            textAlign: "center",
           }}
         >
-          Hi, I&apos;m
-        </motion.p>
 
-        {/* Name */}
-        <motion.h1
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-          style={{
-            fontFamily: "var(--font-heading)",
-            fontSize: "clamp(2.5rem, 7vw, 5.5rem)",
-            fontWeight: 800,
-            letterSpacing: "-0.04em",
-            lineHeight: 1.05,
-            marginBottom: "1.25rem",
-          }}
-        >
-          <span style={{ color: "var(--text-primary)" }}>Abiola John</span>
-          <br />
-          <span className="gradient-text">Oluwaseyi</span>
-        </motion.h1>
-
-        {/* Tagline */}
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.35 }}
-          style={{
-            fontSize: "clamp(1rem, 2.5vw, 1.2rem)",
-            fontWeight: 600,
-            color: "var(--text-secondary)",
-            marginBottom: "1.25rem",
-            letterSpacing: "0.01em",
-          }}
-        >
-          {siteConfig.title}
-        </motion.p>
-
-        {/* Short bio */}
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.45 }}
-          style={{
-            fontSize: "1rem",
-            color: "var(--text-secondary)",
-            maxWidth: "560px",
-            margin: "0 auto 2.5rem",
-            lineHeight: 1.7,
-          }}
-        >
-          {siteConfig.bio}
-        </motion.p>
-
-        {/* CTA Buttons */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.55 }}
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            gap: "1rem",
-            flexWrap: "wrap",
-          }}
-        >
-          <motion.button
-            onClick={scrollToProjects}
-            whileTap={{ scale: 0.97 }}
-            className="btn-primary"
-            style={{ fontSize: "0.95rem", padding: "0.875rem 2rem" }}
+          {/* Greeting */}
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            style={{
+              fontSize: "1.1rem",
+              color: "var(--text-secondary)",
+              marginBottom: "0.5rem",
+              fontWeight: 400,
+            }}
           >
-            <ExternalLink size={16} />
-            See What I've Built
-          </motion.button>
+            Hi, I&apos;m
+          </motion.p>
 
-          <motion.a
-            href='/ABIOLA_JOHN_OLUWASEYI_FRONTEND_DEVELOPER.pdf'
-            target="_blank"
-            rel="noopener noreferrer"
-            whileTap={{ scale: 0.97 }}
-            className="btn-outline"
-            style={{ fontSize: "0.95rem", padding: "0.875rem 2rem" }}
+          {/* Name */}
+          <motion.h1
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+            style={{
+              fontFamily: "var(--font-heading)",
+              fontSize: "clamp(2.5rem, 7vw, 5.5rem)",
+              fontWeight: 800,
+              letterSpacing: "-0.04em",
+              lineHeight: 1.05,
+              marginBottom: "1.25rem",
+            }}
           >
-            <Handshake size={16} />
-            {/* Download Resume */}
-            Hire me
-          </motion.a>
-        </motion.div>
+            <span style={{ color: "var(--text-primary)" }}>Abiola John</span>
+            <br />
+            <span className="gradient-text">Oluwaseyi</span>
+          </motion.h1>
 
-        {/* Social links row */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.75 }}
-          style={{
-            marginTop: "2rem",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            gap: "1rem",
-            color: "var(--text-secondary)",
-            fontSize: "0.85rem",
-          }}
-        >
-          <a
-            href={siteConfig.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{ color: "var(--text-secondary)", textDecoration: "none", transition: "color 300ms" }}
-            onMouseEnter={(e) => (e.currentTarget.style.color = "var(--accent)")}
-            onMouseLeave={(e) => (e.currentTarget.style.color = "var(--text-secondary)")}
+          {/* Tagline */}
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.35 }}
+            style={{
+              fontSize: "clamp(1rem, 2.5vw, 1.2rem)",
+              fontWeight: 600,
+              color: "var(--text-secondary)",
+              marginBottom: "1.25rem",
+              letterSpacing: "0.01em",
+            }}
           >
-            <Github size={24} />
-          </a>
-          <span style={{ width: "4px", height: "4px", borderRadius: "99px", background: "var(--border)", display: "inline-block" }} />
-          <a
-            href={siteConfig.twitter}
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{ color: "var(--text-secondary)", textDecoration: "none", transition: "color 300ms" }}
-            onMouseEnter={(e) => (e.currentTarget.style.color = "var(--accent)")}
-            onMouseLeave={(e) => (e.currentTarget.style.color = "var(--text-secondary)")}
+            {siteConfig.title}
+          </motion.p>
+
+          {/* Short bio */}
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.45 }}
+            style={{
+              fontSize: "1rem",
+              color: "var(--text-secondary)",
+              maxWidth: "560px",
+              margin: "0 auto 2.5rem",
+              lineHeight: 1.7,
+            }}
           >
-            <Twitter size={24} />
-          </a>
-          <span style={{ width: "4px", height: "4px", borderRadius: "99px", background: "var(--border)", display: "inline-block" }} />
-          <a
-            href={`mailto:${siteConfig.email}`}
-            style={{ color: "var(--text-secondary)", textDecoration: "none", transition: "color 300ms" }}
-            onMouseEnter={(e) => (e.currentTarget.style.color = "var(--accent)")}
-            onMouseLeave={(e) => (e.currentTarget.style.color = "var(--text-secondary)")}
+            {siteConfig.bio}
+          </motion.p>
+
+          {/* CTA Buttons */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.55 }}
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "1rem",
+              flexWrap: "wrap",
+            }}
           >
-            <Mail size={24} />
-          </a>
-        </motion.div>
-      </div>
-    </section>
+            <motion.button
+              onClick={scrollToProjects}
+              whileTap={{ scale: 0.97 }}
+              className="btn-primary"
+              style={{ fontSize: "0.95rem", padding: "0.875rem 2rem" }}
+            >
+              <ExternalLink size={16} />
+              See What I've Built
+            </motion.button>
+
+            <motion.button
+              type="button"
+              onClick={() => setIsResumeOpen(true)}
+              whileTap={{ scale: 0.97 }}
+              whileHover={{ scale: 1.02 }}
+              className="btn-outline"
+              style={{ fontSize: "0.95rem", padding: "0.875rem 2rem" }}
+            >
+              <Handshake size={16} />
+              Hire me
+            </motion.button>
+          </motion.div>
+
+          {/* Social links row */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.75 }}
+            style={{
+              marginTop: "2rem",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "1rem",
+              color: "var(--text-secondary)",
+              fontSize: "0.85rem",
+            }}
+          >
+            <a
+              href={siteConfig.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ color: "var(--text-secondary)", textDecoration: "none", transition: "color 300ms" }}
+              onMouseEnter={(e) => (e.currentTarget.style.color = "var(--accent)")}
+              onMouseLeave={(e) => (e.currentTarget.style.color = "var(--text-secondary)")}
+            >
+              <Github size={24} />
+            </a>
+            <span style={{ width: "4px", height: "4px", borderRadius: "99px", background: "var(--border)", display: "inline-block" }} />
+            <a
+              href={siteConfig.twitter}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ color: "var(--text-secondary)", textDecoration: "none", transition: "color 300ms" }}
+              onMouseEnter={(e) => (e.currentTarget.style.color = "var(--accent)")}
+              onMouseLeave={(e) => (e.currentTarget.style.color = "var(--text-secondary)")}
+            >
+              <Twitter size={24} />
+            </a>
+            <span style={{ width: "4px", height: "4px", borderRadius: "99px", background: "var(--border)", display: "inline-block" }} />
+            <a
+              href={`mailto:${siteConfig.email}`}
+              style={{ color: "var(--text-secondary)", textDecoration: "none", transition: "color 300ms" }}
+              onMouseEnter={(e) => (e.currentTarget.style.color = "var(--accent)")}
+              onMouseLeave={(e) => (e.currentTarget.style.color = "var(--text-secondary)")}
+            >
+              <Mail size={24} />
+            </a>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Resume Modal */}
+      <ResumeModal
+        isOpen={isResumeOpen}
+        onClose={() => setIsResumeOpen(false)}
+      />
+    </>
   );
 }

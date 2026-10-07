@@ -10,7 +10,7 @@ export const siteConfig = {
   github: "https://github.com/oluwaseyipd",
   linkedin: "https://linkedin.com/in/oluwaseyiae",
   photo: "/oluwaseyi.webp",
-  resumeUrl: "#", // Replace with actual resume PDF link
+  resumeUrl: "/ABIOLA_JOHN_OLUWASEYI_FRONTEND_DEVELOPER.pdf",
   values: ["Holiness", "Excellence"],
   location: "Ogbomoso, Nigeria",
   openToWork: true,
