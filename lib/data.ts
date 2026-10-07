@@ -56,14 +56,14 @@ export const experience = [
     org: "Independent",
     period: "2025 – Present",
     description:
-      "Build responsive websites and web apps for clients with React, Next.js and TypeScript, including a brand website with one-tap WhatsApp ordering for Lewa's Growth Oil. Handle the work from requirements to deployment.", // TODO: confirm Lewa's Growth Oil is a freelance client and the client is happy to be named; add "[N] client projects" only if the count is verifiable
+      "Build responsive websites and web apps for clients with React, Next.js and TypeScript, including the first website for OTEI 2026, a new tech and entrepreneurship conference in Ogbomoso, and a brand website with one-tap WhatsApp ordering for Lewa's Growth Oil. Handle the work from requirements to deployment.",
     type: "work" as const,
   },
   {
     id: 2,
     title: "Volunteer Frontend Team Lead",
     org: "Higher Ground Baptist Church",
-    period: "Jan 2024 – Present", // TODO: confirm the start date
+    period: "Jan 2024 – Present",
     description:
       "Lead a team of four volunteers (designers, developers and content creators) shipping event platforms for the church, including BISUM and Photizo, with Next.js and React, TypeScript, Supabase, Paystack and Resend. Run pull request reviews and a mobile-first checklist before each release.",
     type: "volunteer" as const,
