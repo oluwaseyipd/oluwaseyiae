@@ -1,301 +1,217 @@
 "use client";
 
-import { motion, AnimatePresence } from "framer-motion";
-import { ExternalLink, Github, BookOpen, Hammer } from "lucide-react";
-import { projects } from "@/lib/data";
 import { useState } from "react";
-import StudyCase from "./StudyCase";
+import { motion, AnimatePresence } from "framer-motion";
+import Link from "next/link";
+import { Github, ArrowUpRight, Layers, Code, Server, Globe } from "lucide-react";
+import { projects, type Project, type ProjectCategory } from "@/lib/project";
 
-interface CaseStudy {
-  problem: string;
-  solution: string;
-  impact: string;
+type FilterOption = "all" | "frontend" | "backend" | "fullstack";
+
+interface FilterItem {
+  key: FilterOption;
+  label: string;
+  icon: typeof Globe;
 }
 
-interface Project {
-  id: number;
-  title: string;
-  subtitle: string;
-  description: string;
-  tech: string[];
-  liveUrl: string;
-  githubUrl: string;
-  image: string;
-  status: "live" | "building";
-  caseStudy: CaseStudy;
-}
+const filterOptions: FilterItem[] = [
+  { key: "all", label: "All Projects", icon: Globe },
+  { key: "frontend", label: "Frontend", icon: Code },
+  { key: "backend", label: "Backend", icon: Server },
+  { key: "fullstack", label: "Fullstack", icon: Layers },
+];
 
-function ProjectCard({ 
-  project, 
-  index, 
-  onCaseStudyClick 
-}: { 
-  project: Project; 
-  index: number;
-  onCaseStudyClick: (projectId: number) => void;
-}) {
+function CategoryBadge({ category }: { category: ProjectCategory }) {
+  const getBadgeStyle = () => {
+    switch (category) {
+      case "fullstack":
+        return {
+          label: "Fullstack",
+          bg: "rgba(34, 211, 238, 0.1)",
+          border: "rgba(34, 211, 238, 0.3)",
+          color: "var(--accent)",
+        };
+      case "frontend":
+        return {
+          label: "Frontend",
+          bg: "rgba(167, 139, 250, 0.12)",
+          border: "rgba(167, 139, 250, 0.3)",
+          color: "var(--accent-secondary)",
+        };
+      case "backend":
+        return {
+          label: "Backend",
+          bg: "rgba(52, 211, 153, 0.12)",
+          border: "rgba(52, 211, 153, 0.3)",
+          color: "#34d399",
+        };
+      default:
+        return {
+          label: category,
+          bg: "rgba(34, 211, 238, 0.1)",
+          border: "rgba(34, 211, 238, 0.2)",
+          color: "var(--accent)",
+        };
+    }
+  };
+
+  const style = getBadgeStyle();
+
   return (
-    <motion.article
-      initial={{ opacity: 0, y: 50 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-60px" }}
-      transition={{
-        duration: 0.6,
-        delay: (index % 2) * 0.15,
-        ease: [0.22, 1, 0.36, 1],
-      }}
-      whileHover={{ y: -8 }}
+    <span
+      className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold capitalize border"
       style={{
-        borderRadius: "1.25rem",
-        background: "var(--surface)",
-        border: "1px solid var(--border)",
-        overflow: "hidden",
-        display: "flex",
-        flexDirection: "column",
-        position: "relative",
-        transition: "border-color 300ms, box-shadow 300ms",
-      }}
-      onMouseEnter={(e) => {
-        const el = e.currentTarget as HTMLElement;
-        el.style.borderColor = "rgba(34,211,238,0.5)";
-        el.style.boxShadow = "0 20px 60px -15px rgba(34,211,238,0.2)";
-      }}
-      onMouseLeave={(e) => {
-        const el = e.currentTarget as HTMLElement;
-        el.style.borderColor = "var(--border)";
-        el.style.boxShadow = "none";
+        backgroundColor: style.bg,
+        borderColor: style.border,
+        color: style.color,
       }}
     >
-      {/* Status badge (if building) */}
-      {project.status === "building" && (
-        <div
-          style={{
-            position: "absolute",
-            top: "1rem",
-            left: "1rem",
-            zIndex: 3,
-            display: "flex",
-            alignItems: "center",
-            gap: "0.375rem",
-            padding: "0.3rem 0.75rem",
-            borderRadius: "99px",
-            background: "rgba(245, 158, 11, 0.15)",
-            border: "1px solid rgba(245, 158, 11, 0.3)",
-            color: "#f59e0b",
-            fontSize: "0.7rem",
-            fontWeight: 700,
-            letterSpacing: "0.05em",
-            backdropFilter: "blur(8px)",
-          }}
-        >
-          <motion.span
-            animate={{ rotate: 360 }}
-            transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-          >
-            <Hammer size={10} />
-          </motion.span>
-          Currently Building
-        </div>
-      )}
+      <span
+        className="w-1.5 h-1.5 rounded-full animate-pulse"
+        style={{ backgroundColor: style.color }}
+      />
+      {style.label}
+    </span>
+  );
+}
 
-      {/* Image */}
-      <div
-        style={{
-          position: "relative",
-          aspectRatio: "16/9",
-          overflow: "hidden",
-          background: "var(--background)",
-        }}
-      >
+function ProjectCard({ project, index }: { project: Project; index: number }) {
+  const [isHovered, setIsHovered] = useState(false);
+
+  return (
+    <motion.article
+      layout
+      initial={{ opacity: 0, y: 30, scale: 0.96 }}
+      animate={{ opacity: 1, y: 0, scale: 1 }}
+      exit={{ opacity: 0, scale: 0.95, transition: { duration: 0.25 } }}
+      transition={{
+        duration: 0.45,
+        delay: index * 0.08,
+        ease: [0.22, 1, 0.36, 1],
+      }}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      className="group relative rounded-2xl border flex flex-col justify-between overflow-hidden transition-colors"
+      style={{
+        background: "var(--surface)",
+        borderColor: isHovered ? "var(--accent)" : "var(--border)",
+        boxShadow: isHovered
+          ? "0 22px 45px -12px rgba(0, 0, 0, 0.35), 0 0 20px -5px rgba(34, 211, 238, 0.2)"
+          : "0 6px 20px -8px rgba(0, 0, 0, 0.15)",
+      }}
+    >
+
+      {/* Card Image Area with "View Project" Overlay on Hover */}
+      <div className="relative w-full aspect-[16/10] overflow-hidden bg-slate-950/80 border-b border-border">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
         <motion.img
           src={project.image}
           alt={project.title}
-          whileHover={{ scale: 1.05 }}
-          transition={{ duration: 0.4 }}
-          style={{
-            width: "100%",
-            height: "100%",
-            objectFit: "cover",
-            display: "block",
-          }}
+          animate={{ scale: isHovered ? 1.07 : 1 }}
+          transition={{ duration: 0.4, ease: "easeOut" }}
+          className="w-full h-full object-cover object-top block"
           onError={(e) => {
             const target = e.target as HTMLImageElement;
             target.style.display = "none";
           }}
         />
-        {/* Overlay gradient */}
-        <div
+
+        {/* Hover Overlay with "View Project" Button */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: isHovered ? 1 : 0 }}
+          transition={{ duration: 0.25 }}
+          className="absolute inset-0 z-20 flex items-center justify-center p-4"
           style={{
-            position: "absolute",
-            bottom: 0,
-            left: 0,
-            right: 0,
-            height: "60%",
-            background: "linear-gradient(to top, var(--surface), transparent)",
-            pointerEvents: "none",
+            background: "rgba(2, 6, 23, 0.72)",
+            backdropFilter: "blur(4px)",
           }}
-        />
+        >
+          <Link
+            href={`/projects/${project.slug}`}
+            className="bg-accent inline-flex items-center px-5 py-2.5 rounded-xl font-bold text-white text-xs md:text-sm tracking-wide shadow-lg transform transition-transform group-hover:scale-105 active:scale-95"
+          >
+            <span>View Project</span>
+          </Link>
+        </motion.div>
       </div>
 
-      {/* Content */}
-      <div style={{ padding: "1.5rem", flex: 1, display: "flex", flexDirection: "column" }}>
-        {/* Title */}
-        <div style={{ marginBottom: "0.75rem" }}>
+      {/* Card Content */}
+      <div className="p-5 sm:p-6 flex flex-col flex-1 justify-between">
+        <div>
+          {/* Tag & Subtitle Row */}
+          <div className="flex items-center justify-between gap-2 mb-3">
+                      {/* Project Name (Title) */}
           <h3
+            className="text-lg sm:text-xl font-bold mb-2 tracking-tight transition-colors"
             style={{
               fontFamily: "var(--font-heading)",
-              fontSize: "1.2rem",
-              fontWeight: 700,
-              letterSpacing: "-0.02em",
-              color: "var(--text-primary)",
-              marginBottom: "0.2rem",
+              color: isHovered ? "var(--accent)" : "var(--text-primary)",
             }}
           >
-            {project.title}
+            <Link
+              href={`/projects/${project.slug}`}
+              className="hover:underline focus:outline-none"
+            >
+              {project.title}
+            </Link>
           </h3>
+
+          <span className="text-sm uppercase font-bold" style={{ color: "var(--text-secondary)" }}>
+            {project.category}
+          </span>
+
+          </div>
+
+
+
+          {/* Short Description */}
           <p
-            style={{
-              fontSize: "0.8rem",
-              fontWeight: 600,
-              color: "var(--accent)",
-              letterSpacing: "0.03em",
-            }}
+            className="text-xs sm:text-sm leading-relaxed mb-4 line-clamp-3"
+            style={{ color: "var(--text-secondary)" }}
           >
-            {project.subtitle}
+            {project.description}
           </p>
-        </div>
-
-        {/* Description */}
-        <p
-          style={{
-            fontSize: "0.875rem",
-            color: "var(--text-secondary)",
-            lineHeight: 1.7,
-            marginBottom: "1.25rem",
-            flex: 1,
-          }}
-        >
-          {project.description}
-        </p>
-
-        {/* Tech badges */}
-        <div
-          style={{
-            display: "flex",
-            flexWrap: "wrap",
-            gap: "0.5rem",
-            marginBottom: "1.5rem",
-          }}
-        >
-          {project.tech.map((t) => (
-            <span key={t} className="badge" style={{ fontSize: "0.7rem" }}>
-              {t}
-            </span>
-          ))}
-        </div>
-
-        {/* Actions */}
-        <div
-        className="flex flex-row flex-wrap items-center gap-3 border-t border-border pt-5"
-          style={{
-            gap: "0.75rem",
-            flexWrap: "wrap",
-            alignItems: "center",
-            borderTop: "1px solid var(--border)",
-            paddingTop: "1.25rem",
-          }}
-        >
-          <motion.a
-            href={project.liveUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            whileHover={{ scale: 1.04 }}
-            whileTap={{ scale: 0.97 }}
-            className="btn-primary"
-            style={{ padding: "0.5rem 1.125rem", fontSize: "0.8rem", flex: 1, justifyContent: "center" }}
-          >
-            <ExternalLink size={13} />
-            Live Demo
-          </motion.a>
-
-          <motion.button
-            onClick={() => onCaseStudyClick(project.id)}
-            whileHover={{ scale: 1.04 }}
-            whileTap={{ scale: 0.97 }}
-            className="btn-outline"
-            style={{ 
-              padding: "0.5rem 1rem", 
-              fontSize: "0.8rem", 
-              flex: 1, 
-              justifyContent: "center",
-              background: "transparent",
-              border: "1px solid var(--border)",
-              color: "var(--text-secondary)",
-              cursor: "pointer",
-              fontFamily: "inherit",
-              borderRadius: "0.5rem",
-              display: "flex",
-              alignItems: "center",
-              gap: "0.5rem",
-              transition: "all 300ms",
-            }}
-            onMouseEnter={(e) => {
-              const el = e.currentTarget as HTMLButtonElement;
-              el.style.background = "var(--surface-hover)";
-              el.style.color = "var(--text-primary)";
-            }}
-            onMouseLeave={(e) => {
-              const el = e.currentTarget as HTMLButtonElement;
-              el.style.background = "transparent";
-              el.style.color = "var(--text-secondary)";
-            }}
-          >
-            <BookOpen size={13} />
-            Case Study
-          </motion.button>
-
-          <motion.a
-            href={project.githubUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            whileHover={{ scale: 1.1, color: "var(--accent)" }}
-            whileTap={{ scale: 0.95 }}
-            aria-label={`View ${project.title} on GitHub`}
-            style={{
-              width: "38px",
-              height: "38px",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              borderRadius: "0.5rem",
-              border: "1px solid var(--border)",
-              color: "var(--text-secondary)",
-              textDecoration: "none",
-              transition: "all 300ms",
-              flexShrink: 0,
-            }}
-          >
-            <Github size={16} />
-          </motion.a>
         </div>
       </div>
     </motion.article>
   );
 }
 
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 40 },
+  visible: (i: number = 0) => ({
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] as const },
+  }),
+};
+
 export function Projects() {
-  const [selectedProjectId, setSelectedProjectId] = useState<number | null>(null);
+  const [activeFilter, setActiveFilter] = useState<FilterOption>("all");
+
+  const filteredProjects = projects.filter((project) => {
+    if (activeFilter === "all") return true;
+    return project.category === activeFilter;
+  });
 
   return (
     <section id="projects" className="section">
-      <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 1.5rem" }}>
-        {/* Header */}
+      <div
+        style={{
+          maxWidth: "1200px",
+          margin: "0 auto",
+          padding: "0 1.5rem",
+        }}
+      >
+        {/* Section header */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial="hidden"
+          whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.6 }}
-          style={{ marginBottom: "3.5rem" }}
+          variants={fadeUp}
+          style={{ marginBottom: "4rem" }}
         >
           <p className="section-tag">Featured Work</p>
           <div
@@ -307,23 +223,23 @@ export function Projects() {
               gap: "1rem",
             }}
           >
-            <h2
-              style={{
-                fontFamily: "var(--font-heading)",
-                fontSize: "clamp(2rem, 5vw, 3.5rem)",
-                fontWeight: 800,
-                letterSpacing: "-0.03em",
-                lineHeight: 1.1,
-              }}
-            >
-              Projects I&apos;ve{" "}
-              <span className="gradient-text">Built</span>
-            </h2>
-            <motion.a
+          <h2
+            style={{
+              fontFamily: "var(--font-heading)",
+              fontSize: "clamp(2rem, 5vw, 3.5rem)",
+              fontWeight: 800,
+              letterSpacing: "-0.03em",
+              lineHeight: 1.1,
+            }}
+          >
+            Projects I&apos;ve {" "}
+            <span className="gradient-text">Built</span>
+          </h2>
+
+          <motion.a
               href="https://github.com/oluwaseyipd"
               target="_blank"
               rel="noopener noreferrer"
-              whileHover={{ scale: 1.04 }}
               className="btn-outline"
               style={{ fontSize: "0.85rem", padding: "0.6rem 1.25rem" }}
             >
@@ -333,34 +249,67 @@ export function Projects() {
           </div>
         </motion.div>
 
-        {/* Projects grid */}
-        <div
+
+        {/* Filter Bar */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          className="mb-10 flex items-center justify-start flex-wrap gap-2 sm:gap-3 p-1.5 rounded-2xl border w-fit"
           style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fill, minmax(min(100%, 520px), 1fr))",
-            gap: "1.5rem",
+            background: "var(--surface)",
+            borderColor: "var(--border)",
           }}
         >
-          {(projects as Project[]).map((project, i) => (
-            <ProjectCard 
-              key={project.id} 
-              project={project} 
-              index={i}
-              onCaseStudyClick={setSelectedProjectId}
-            />
-          ))}
-        </div>
-      </div>
+          {filterOptions.map((opt) => {
+            const isActive = activeFilter === opt.key;
+            const Icon = opt.icon;
 
-      {/* Case Study Modal */}
-      <AnimatePresence>
-        {selectedProjectId !== null && (
-          <StudyCase
-            projectId={selectedProjectId}
-            onClose={() => setSelectedProjectId(null)}
-          />
-        )}
-      </AnimatePresence>
+            return (
+              <button
+                key={opt.key}
+                onClick={() => setActiveFilter(opt.key)}
+                className="relative px-3.5 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-colors flex items-center gap-2 cursor-pointer select-none"
+                style={{
+                  color: isActive ? "#020617" : "var(--text-secondary)",
+                }}
+              >
+                {isActive && (
+                  <motion.div
+                    layoutId="activeProjectFilter"
+                    className="absolute inset-0 rounded-xl"
+                    style={{
+                      backgroundColor: "var(--accent)",
+                    }}
+                    transition={{ type: "spring", stiffness: 450, damping: 30 }}
+                  />
+                )}
+                <span className="relative z-10 flex items-center gap-1.5">
+                  <Icon size={14} />
+                  <span>{opt.label}</span>
+                </span>
+              </button>
+            );
+          })}
+        </motion.div>
+
+        {/* 3 Cards in a Single Row Grid */}
+        <motion.div
+          layout
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 items-stretch"
+        >
+          <AnimatePresence mode="popLayout">
+            {filteredProjects.map((project, index) => (
+              <ProjectCard
+                key={project.id}
+                project={project}
+                index={index}
+              />
+            ))}
+          </AnimatePresence>
+        </motion.div>
+      </div>
     </section>
   );
 }
