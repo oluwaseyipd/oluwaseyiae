@@ -1,14 +1,24 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useState, useEffect, type FormEvent } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Send, Mail, Twitter, CheckCircle, Loader2, AlertCircle } from "lucide-react";
+import { Send, Mail, Twitter, CheckCircle2, Loader2, AlertCircle, X, Sparkles } from "lucide-react";
 import { siteConfig } from "@/lib/data";
 
 export function Contact() {
   const [form, setForm] = useState({ name: "", email: "", subject: "", message: "" });
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
   const [errorMessage, setErrorMessage] = useState("");
+  const [submittedName, setSubmittedName] = useState("");
+
+  useEffect(() => {
+    if (status === "sent" || status === "error") {
+      const timer = setTimeout(() => {
+        setStatus("idle");
+      }, 6000);
+      return () => clearTimeout(timer);
+    }
+  }, [status]);
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -30,9 +40,9 @@ export function Contact() {
         throw new Error(data.message || "Failed to send message. Please try again.");
       }
 
+      setSubmittedName(form.name.trim());
       setStatus("sent");
       setForm({ name: "", email: "", subject: "", message: "" });
-      setTimeout(() => setStatus("idle"), 6000);
     } catch (error) {
       console.error("Contact form error:", error);
       setStatus("error");
@@ -41,7 +51,6 @@ export function Contact() {
           ? error.message
           : "Failed to send message. Please reach out directly via email."
       );
-      setTimeout(() => setStatus("idle"), 6000);
     }
   };
 
@@ -224,20 +233,38 @@ export function Contact() {
               {/* Submit */}
               <motion.button
                 type="submit"
-                disabled={status === "sending" || status === "sent"}
-                whileHover={status === "idle" ? { scale: 1.02, y: -2 } : {}}
-                whileTap={status === "idle" ? { scale: 0.98 } : {}}
+                disabled={status === "sending"}
+                whileHover={status !== "sending" ? { scale: 1.02, y: -2 } : {}}
+                whileTap={status !== "sending" ? { scale: 0.98 } : {}}
                 className="btn-primary"
                 style={{
                   width: "100%",
                   justifyContent: "center",
                   padding: "1rem",
                   fontSize: "0.95rem",
-                  opacity: status === "sending" ? 0.8 : 1,
+                  opacity: status === "sending" ? 0.75 : 1,
+                  cursor: status === "sending" ? "not-allowed" : "pointer",
                 }}
               >
                 <AnimatePresence mode="wait">
-                  {status === "idle" && (
+                  {status === "sending" ? (
+                    <motion.span
+                      key="sending"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}
+                    >
+                      <motion.span
+                        animate={{ rotate: 360 }}
+                        transition={{ duration: 0.8, repeat: Infinity, ease: "linear" }}
+                        style={{ display: "inline-flex" }}
+                      >
+                        <Loader2 size={16} />
+                      </motion.span>
+                      Sending Message...
+                    </motion.span>
+                  ) : (
                     <motion.span
                       key="idle"
                       initial={{ opacity: 0 }}
@@ -249,71 +276,8 @@ export function Contact() {
                       Send Message
                     </motion.span>
                   )}
-                  {status === "sending" && (
-                    <motion.span
-                      key="sending"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
-                      style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}
-                    >
-                      <motion.span animate={{ rotate: 360 }} transition={{ duration: 0.8, repeat: Infinity, ease: "linear" }}>
-                        <Loader2 size={16} />
-                      </motion.span>
-                      Sending...
-                    </motion.span>
-                  )}
-                  {status === "sent" && (
-                    <motion.span
-                      key="sent"
-                      initial={{ opacity: 0, scale: 0.8 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      exit={{ opacity: 0 }}
-                      style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}
-                    >
-                      <CheckCircle size={16} />
-                      Message Sent!
-                    </motion.span>
-                  )}
-                  {status === "error" && (
-                    <motion.span
-                      key="error"
-                      initial={{ opacity: 0, scale: 0.8 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      exit={{ opacity: 0 }}
-                      style={{ display: "flex", alignItems: "center", gap: "0.5rem", color: "#ef4444" }}
-                    >
-                      <AlertCircle size={16} />
-                      Failed to send
-                    </motion.span>
-                  )}
                 </AnimatePresence>
               </motion.button>
-
-              {/* Error feedback message */}
-              <AnimatePresence>
-                {status === "error" && errorMessage && (
-                  <motion.div
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
-                    style={{
-                      padding: "0.75rem 1rem",
-                      borderRadius: "0.5rem",
-                      background: "rgba(239, 68, 68, 0.1)",
-                      border: "1px solid rgba(239, 68, 68, 0.3)",
-                      color: "#f87171",
-                      fontSize: "0.85rem",
-                      display: "flex",
-                      alignItems: "center",
-                      gap: "0.5rem",
-                    }}
-                  >
-                    <AlertCircle size={15} style={{ flexShrink: 0 }} />
-                    <span>{errorMessage}</span>
-                  </motion.div>
-                )}
-              </AnimatePresence>
             </form>
           </motion.div>
 
@@ -474,6 +438,289 @@ export function Contact() {
           </motion.div>
         </div>
       </div>
-    </section >
+
+      {/* Floating Bottom-Right Toast Confirmations */}
+      <AnimatePresence>
+        {status === "sent" && (
+          <motion.aside
+            role="status"
+            aria-live="polite"
+            aria-label="Message Sent Notification"
+            initial={{ opacity: 0, y: 40, x: 20, scale: 0.92, filter: "blur(6px)" }}
+            animate={{ opacity: 1, y: 0, x: 0, scale: 1, filter: "blur(0px)" }}
+            exit={{ opacity: 0, y: 20, scale: 0.95, filter: "blur(4px)" }}
+            transition={{ type: "spring", stiffness: 420, damping: 28 }}
+            style={{
+              position: "fixed",
+              bottom: "1.5rem",
+              right: "1.5rem",
+              zIndex: 9999,
+              width: "calc(100vw - 2rem)",
+              maxWidth: "400px",
+              borderRadius: "1rem",
+              background: "var(--surface)",
+              backdropFilter: "blur(20px)",
+              WebkitBackdropFilter: "blur(20px)",
+              border: "1px solid rgba(34, 211, 238, 0.4)",
+              boxShadow: "0 20px 45px -10px rgba(0, 0, 0, 0.6), 0 0 30px -5px rgba(34, 211, 238, 0.3)",
+              padding: "1.125rem 1.25rem 1.35rem",
+              overflow: "hidden",
+            }}
+          >
+            <div style={{ display: "flex", alignItems: "flex-start", gap: "0.875rem" }}>
+              {/* Glowing Success Badge */}
+              <div
+                style={{
+                  position: "relative",
+                  width: "40px",
+                  height: "40px",
+                  borderRadius: "0.75rem",
+                  background: "linear-gradient(135deg, rgba(34, 211, 238, 0.2), rgba(167, 139, 250, 0.2))",
+                  border: "1px solid rgba(34, 211, 238, 0.4)",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  color: "var(--accent)",
+                  flexShrink: 0,
+                  boxShadow: "0 0 15px rgba(34, 211, 238, 0.3)",
+                }}
+              >
+                <motion.div
+                  initial={{ scale: 0, rotate: -45 }}
+                  animate={{ scale: 1, rotate: 0 }}
+                  transition={{ type: "spring", stiffness: 500, damping: 20, delay: 0.1 }}
+                >
+                  <CheckCircle2 size={22} style={{ color: "var(--accent)" }} />
+                </motion.div>
+              </div>
+
+              {/* Content */}
+              <div style={{ flex: 1, minWidth: 0 }}>
+                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "0.25rem" }}>
+                  <span
+                    style={{
+                      display: "inline-flex",
+                      alignItems: "center",
+                      gap: "0.35rem",
+                      fontSize: "0.7rem",
+                      fontWeight: 700,
+                      letterSpacing: "0.08em",
+                      textTransform: "uppercase",
+                      color: "var(--accent)",
+                    }}
+                  >
+                    <Sparkles size={11} />
+                    Message Delivered
+                  </span>
+                  <button
+                    type="button"
+                    onClick={() => setStatus("idle")}
+                    aria-label="Close notification"
+                    style={{
+                      background: "transparent",
+                      border: "none",
+                      color: "var(--text-secondary)",
+                      cursor: "pointer",
+                      padding: "2px",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      borderRadius: "4px",
+                      transition: "color 150ms, transform 150ms",
+                    }}
+                    onMouseEnter={(e) => {
+                      (e.currentTarget as HTMLElement).style.color = "var(--text-primary)";
+                      (e.currentTarget as HTMLElement).style.transform = "scale(1.1)";
+                    }}
+                    onMouseLeave={(e) => {
+                      (e.currentTarget as HTMLElement).style.color = "var(--text-secondary)";
+                      (e.currentTarget as HTMLElement).style.transform = "scale(1)";
+                    }}
+                  >
+                    <X size={16} />
+                  </button>
+                </div>
+
+                <h4
+                  style={{
+                    fontFamily: "var(--font-heading)",
+                    fontSize: "0.975rem",
+                    fontWeight: 700,
+                    color: "var(--text-primary)",
+                    margin: "0 0 0.25rem",
+                    letterSpacing: "-0.01em",
+                  }}
+                >
+                  Message Sent Successfully!
+                </h4>
+
+                <p
+                  style={{
+                    fontSize: "0.825rem",
+                    color: "var(--text-secondary)",
+                    lineHeight: 1.5,
+                    margin: 0,
+                  }}
+                >
+                  {submittedName ? (
+                    <>Thank you, <strong style={{ color: "var(--text-primary)" }}>{submittedName}</strong>! I&apos;ve received your note and will get back to you soon.</>
+                  ) : (
+                    <>Thank you! Your message has been sent to my inbox and I&apos;ll get back to you soon.</>
+                  )}
+                </p>
+              </div>
+            </div>
+
+            {/* Countdown progress bar */}
+            <motion.div
+              initial={{ width: "100%" }}
+              animate={{ width: "0%" }}
+              transition={{ duration: 6, ease: "linear" }}
+              style={{
+                position: "absolute",
+                bottom: 0,
+                left: 0,
+                height: "3px",
+                background: "linear-gradient(90deg, var(--accent), var(--accent-secondary))",
+              }}
+            />
+          </motion.aside>
+        )}
+
+        {status === "error" && (
+          <motion.aside
+            role="alert"
+            aria-live="assertive"
+            aria-label="Message Failed Notification"
+            initial={{ opacity: 0, y: 40, x: 20, scale: 0.92, filter: "blur(6px)" }}
+            animate={{ opacity: 1, y: 0, x: 0, scale: 1, filter: "blur(0px)" }}
+            exit={{ opacity: 0, y: 20, scale: 0.95, filter: "blur(4px)" }}
+            transition={{ type: "spring", stiffness: 420, damping: 28 }}
+            style={{
+              position: "fixed",
+              bottom: "1.5rem",
+              right: "1.5rem",
+              zIndex: 9999,
+              width: "calc(100vw - 2rem)",
+              maxWidth: "400px",
+              borderRadius: "1rem",
+              background: "var(--surface)",
+              backdropFilter: "blur(20px)",
+              WebkitBackdropFilter: "blur(20px)",
+              border: "1px solid rgba(239, 68, 68, 0.4)",
+              boxShadow: "0 20px 45px -10px rgba(0, 0, 0, 0.6), 0 0 30px -5px rgba(239, 68, 68, 0.25)",
+              padding: "1.125rem 1.25rem 1.35rem",
+              overflow: "hidden",
+            }}
+          >
+            <div style={{ display: "flex", alignItems: "flex-start", gap: "0.875rem" }}>
+              {/* Error Badge */}
+              <div
+                style={{
+                  position: "relative",
+                  width: "40px",
+                  height: "40px",
+                  borderRadius: "0.75rem",
+                  background: "rgba(239, 68, 68, 0.15)",
+                  border: "1px solid rgba(239, 68, 68, 0.4)",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  color: "#ef4444",
+                  flexShrink: 0,
+                  boxShadow: "0 0 15px rgba(239, 68, 68, 0.3)",
+                }}
+              >
+                <AlertCircle size={22} />
+              </div>
+
+              {/* Content */}
+              <div style={{ flex: 1, minWidth: 0 }}>
+                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "0.25rem" }}>
+                  <span
+                    style={{
+                      fontSize: "0.7rem",
+                      fontWeight: 700,
+                      letterSpacing: "0.08em",
+                      textTransform: "uppercase",
+                      color: "#f87171",
+                    }}
+                  >
+                    Delivery Failed
+                  </span>
+                  <button
+                    type="button"
+                    onClick={() => setStatus("idle")}
+                    aria-label="Close notification"
+                    style={{
+                      background: "transparent",
+                      border: "none",
+                      color: "var(--text-secondary)",
+                      cursor: "pointer",
+                      padding: "2px",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      borderRadius: "4px",
+                      transition: "color 150ms, transform 150ms",
+                    }}
+                    onMouseEnter={(e) => {
+                      (e.currentTarget as HTMLElement).style.color = "var(--text-primary)";
+                      (e.currentTarget as HTMLElement).style.transform = "scale(1.1)";
+                    }}
+                    onMouseLeave={(e) => {
+                      (e.currentTarget as HTMLElement).style.color = "var(--text-secondary)";
+                      (e.currentTarget as HTMLElement).style.transform = "scale(1)";
+                    }}
+                  >
+                    <X size={16} />
+                  </button>
+                </div>
+
+                <h4
+                  style={{
+                    fontFamily: "var(--font-heading)",
+                    fontSize: "0.975rem",
+                    fontWeight: 700,
+                    color: "var(--text-primary)",
+                    margin: "0 0 0.25rem",
+                    letterSpacing: "-0.01em",
+                  }}
+                >
+                  Failed to send message
+                </h4>
+
+                <p
+                  style={{
+                    fontSize: "0.825rem",
+                    color: "var(--text-secondary)",
+                    lineHeight: 1.5,
+                    margin: 0,
+                  }}
+                >
+                  {errorMessage || (
+                    <>Please try again or reach out directly at <a href={`mailto:${siteConfig.email}`} style={{ color: "var(--accent)", textDecoration: "underline" }}>{siteConfig.email}</a>.</>
+                  )}
+                </p>
+              </div>
+            </div>
+
+            {/* Countdown progress bar */}
+            <motion.div
+              initial={{ width: "100%" }}
+              animate={{ width: "0%" }}
+              transition={{ duration: 6, ease: "linear" }}
+              style={{
+                position: "absolute",
+                bottom: 0,
+                left: 0,
+                height: "3px",
+                background: "linear-gradient(90deg, #ef4444, #f97316)",
+              }}
+            />
+          </motion.aside>
+        )}
+      </AnimatePresence>
+    </section>
   );
 }
