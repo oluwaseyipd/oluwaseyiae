@@ -13,12 +13,16 @@ const dmSans = DM_Sans({
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
   variable: "--font-heading",
+  weight: ["300", "400", "500", "600", "700"],
   display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: `${siteConfig.name} — React & Next.js Specialist`,
-  description: `${siteConfig.bio} Full-stack engineer specializing in React, Next.js, TypeScript, and Django.`,
+  title: `${siteConfig.name} | Frontend Developer`,
+  description: `${siteConfig.bio}`,
+  icons: {
+    icon: `${siteConfig.icon}`,
+  },
   keywords: [
     "Abiola John Oluwaseyi",
     "React Developer",
@@ -27,7 +31,7 @@ export const metadata: Metadata = {
     "Django",
     "TypeScript",
     "Nigeria",
-    "Frontend Engineer",
+    "Frontend Developer",
     "Software Engineer",
   ],
   authors: [{ name: siteConfig.name, url: "https://oluwaseyiae.vercel.app" }],
@@ -71,10 +75,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-      </head>
+    <html lang="en" className={`${dmSans.variable} ${spaceGrotesk.variable}`} suppressHydrationWarning>
       <body className={`${dmSans.variable} ${spaceGrotesk.variable}`}>
         <ThemeProvider>{children}</ThemeProvider>
       </body>

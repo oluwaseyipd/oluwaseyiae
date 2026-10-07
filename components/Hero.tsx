@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowDown, Download, ExternalLink, Sparkles } from "lucide-react";
+import { Handshake, ExternalLink, Twitter, Github, Mail } from "lucide-react";
 import { siteConfig } from "@/lib/data";
 
 // Floating geometric shape component
@@ -164,39 +164,6 @@ export function Hero() {
           textAlign: "center",
         }}
       >
-        {/* Status badge */}
-        {/* <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          style={{
-            display: "inline-flex",
-            alignItems: "center",
-            gap: "0.5rem",
-            padding: "0.375rem 1rem",
-            borderRadius: "99px",
-            background: "rgba(34, 211, 238, 0.08)",
-            border: "1px solid rgba(34, 211, 238, 0.2)",
-            fontSize: "0.8rem",
-            fontWeight: 500,
-            color: "var(--accent)",
-            marginBottom: "2rem",
-          }}
-        >
-          <motion.span
-            animate={{ scale: [1, 1.3, 1] }}
-            transition={{ duration: 1.5, repeat: Infinity }}
-            style={{
-              width: "6px",
-              height: "6px",
-              borderRadius: "99px",
-              background: "var(--accent)",
-              display: "inline-block",
-            }}
-          />
-          <Sparkles size={12} />
-          Available for hire
-        </motion.div> */}
 
         {/* Greeting */}
         <motion.p
@@ -245,9 +212,7 @@ export function Hero() {
             letterSpacing: "0.01em",
           }}
         >
-          React &amp; Next.js Specialist{" "}
-          <span style={{ color: "var(--accent-secondary)" }}>•</span>{" "}
-          Full-Stack Engineer (Django)
+          {siteConfig.title}
         </motion.p>
 
         {/* Short bio */}
@@ -281,26 +246,25 @@ export function Hero() {
         >
           <motion.button
             onClick={scrollToProjects}
-            whileHover={{ scale: 1.04, y: -2 }}
             whileTap={{ scale: 0.97 }}
             className="btn-primary"
             style={{ fontSize: "0.95rem", padding: "0.875rem 2rem" }}
           >
             <ExternalLink size={16} />
-            View My Work
+            See What I've Built
           </motion.button>
 
           <motion.a
             href='/ABIOLA_JOHN_OLUWASEYI_FRONTEND_DEVELOPER.pdf'
             target="_blank"
             rel="noopener noreferrer"
-            whileHover={{ scale: 1.04, y: -2 }}
             whileTap={{ scale: 0.97 }}
             className="btn-outline"
             style={{ fontSize: "0.95rem", padding: "0.875rem 2rem" }}
           >
-            <Download size={16} />
-            Download Resume
+            <Handshake size={16} />
+            {/* Download Resume */}
+            Hire me
           </motion.a>
         </motion.div>
 
@@ -327,7 +291,7 @@ export function Hero() {
             onMouseEnter={(e) => (e.currentTarget.style.color = "var(--accent)")}
             onMouseLeave={(e) => (e.currentTarget.style.color = "var(--text-secondary)")}
           >
-            GitHub
+            <Github size={24} />
           </a>
           <span style={{ width: "4px", height: "4px", borderRadius: "99px", background: "var(--border)", display: "inline-block" }} />
           <a
@@ -338,7 +302,7 @@ export function Hero() {
             onMouseEnter={(e) => (e.currentTarget.style.color = "var(--accent)")}
             onMouseLeave={(e) => (e.currentTarget.style.color = "var(--text-secondary)")}
           >
-            Twitter / X
+            <Twitter size={24} />
           </a>
           <span style={{ width: "4px", height: "4px", borderRadius: "99px", background: "var(--border)", display: "inline-block" }} />
           <a
@@ -347,38 +311,10 @@ export function Hero() {
             onMouseEnter={(e) => (e.currentTarget.style.color = "var(--accent)")}
             onMouseLeave={(e) => (e.currentTarget.style.color = "var(--text-secondary)")}
           >
-            Email
+            <Mail size={24} />
           </a>
         </motion.div>
       </div>
-
-      {/* Scroll indicator */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.2 }}
-        className="hidden md:flex"
-        style={{
-          position: "absolute",
-          bottom: "2rem",
-          left: "50%",
-          transform: "translateX(-50%)",
-          flexDirection: "column",
-          alignItems: "center",
-          gap: "0.5rem",
-          color: "var(--text-secondary)",
-          cursor: "pointer",
-        }}
-        onClick={() => document.getElementById("about")?.scrollIntoView({ behavior: "smooth" })}
-        aria-label="Scroll to about section"
-      >
-        <motion.div
-          animate={{ y: [0, 6, 0] }}
-          transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-        >
-          <ArrowDown size={16} />
-        </motion.div>
-      </motion.div>
     </section>
   );
 }
