@@ -1,42 +1,47 @@
 "use client";
 
-import { useState, type FormEvent, useEffect } from "react";
+import { useState, type FormEvent } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Send, Mail, Twitter, CheckCircle, Loader2 } from "lucide-react";
+import { Send, Mail, Twitter, CheckCircle, Loader2, AlertCircle } from "lucide-react";
 import { siteConfig } from "@/lib/data";
-import emailjs from '@emailjs/browser';
 
 export function Contact() {
-  const [form, setForm] = useState({ name: "", email: "", message: "" });
+  const [form, setForm] = useState({ name: "", email: "", subject: "", message: "" });
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
-
-  useEffect(() => {
-    // Initialize EmailJS
-    emailjs.init(process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!);
-  }, []);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setStatus("sending");
-
-    // Simulate send delay — replace with EmailJS or similar
-    console.log("Form submitted:", form);
-    await new Promise((r) => setTimeout(r, 1200));
+    setErrorMessage("");
 
     try {
-      // Integrate EmailJS
-      await emailjs.send(
-        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
-        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
-        form
-      );
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(form),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok || !data.success) {
+        throw new Error(data.message || "Failed to send message. Please try again.");
+      }
+
       setStatus("sent");
-      setForm({ name: "", email: "", message: "" });
-      setTimeout(() => setStatus("idle"), 5000);
+      setForm({ name: "", email: "", subject: "", message: "" });
+      setTimeout(() => setStatus("idle"), 6000);
     } catch (error) {
-      console.error("EmailJS error:", error);
+      console.error("Contact form error:", error);
       setStatus("error");
-      setTimeout(() => setStatus("idle"), 5000);
+      setErrorMessage(
+        error instanceof Error
+          ? error.message
+          : "Failed to send message. Please reach out directly via email."
+      );
+      setTimeout(() => setStatus("idle"), 6000);
     }
   };
 
@@ -85,8 +90,7 @@ export function Contact() {
             <span className="gradient-text">Work Together</span>
           </h2>
           <p style={{ color: "var(--text-secondary)", lineHeight: 1.7, fontSize: "1rem" }}>
-            I&apos;m currently open to full-time Frontend / Full-Stack roles and exciting
-            collaborations. Whether you have a project in mind or just want to say hello —
+            I&apos;m currently open to full-time Frontend role, internships and freelancing . Whether you have a project in mind or just want to say hello —
             my inbox is always open.
           </p>
         </motion.div>
@@ -150,6 +154,33 @@ export function Contact() {
                   value={form.email}
                   onChange={handleChange}
                   placeholder="john@example.com"
+                  style={inputStyle}
+                  onFocus={(e) => {
+                    (e.target as HTMLInputElement).style.borderColor = "var(--accent)";
+                    (e.target as HTMLInputElement).style.boxShadow = "0 0 0 3px rgba(34,211,238,0.1)";
+                  }}
+                  onBlur={(e) => {
+                    (e.target as HTMLInputElement).style.borderColor = "var(--border)";
+                    (e.target as HTMLInputElement).style.boxShadow = "none";
+                  }}
+                />
+              </div>
+
+              {/* Subject */}
+              <div>
+                <label
+                  htmlFor="subject"
+                  style={{ display: "block", fontSize: "0.8rem", fontWeight: 600, color: "var(--text-secondary)", marginBottom: "0.5rem", letterSpacing: "0.05em", textTransform: "uppercase" }}
+                >
+                  Subject
+                </label>
+                <input
+                  id="subject"
+                  name="subject"
+                  type="text"
+                  value={form.subject}
+                  onChange={handleChange}
+                  placeholder="Frontend role inquiry / Project collaboration"
                   style={inputStyle}
                   onFocus={(e) => {
                     (e.target as HTMLInputElement).style.borderColor = "var(--accent)";
@@ -252,12 +283,37 @@ export function Contact() {
                       exit={{ opacity: 0 }}
                       style={{ display: "flex", alignItems: "center", gap: "0.5rem", color: "#ef4444" }}
                     >
-                      <Mail size={16} />
+                      <AlertCircle size={16} />
                       Failed to send
                     </motion.span>
                   )}
                 </AnimatePresence>
               </motion.button>
+
+              {/* Error feedback message */}
+              <AnimatePresence>
+                {status === "error" && errorMessage && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    style={{
+                      padding: "0.75rem 1rem",
+                      borderRadius: "0.5rem",
+                      background: "rgba(239, 68, 68, 0.1)",
+                      border: "1px solid rgba(239, 68, 68, 0.3)",
+                      color: "#f87171",
+                      fontSize: "0.85rem",
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "0.5rem",
+                    }}
+                  >
+                    <AlertCircle size={15} style={{ flexShrink: 0 }} />
+                    <span>{errorMessage}</span>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </form>
           </motion.div>
 
@@ -410,13 +466,14 @@ export function Contact() {
                 </span>
               </div>
               <p style={{ fontSize: "0.9rem", color: "var(--text-secondary)", lineHeight: 1.7 }}>
-                Available for <strong style={{ color: "var(--text-primary)" }}>full-time Frontend</strong> and{" "}
-                <strong style={{ color: "var(--text-primary)" }}>Full-Stack roles</strong>, as well as freelance projects and exciting collaborations.
+                Open to <strong style={{ color: "var(--text-primary)" }}>entry-level Frontend roles</strong> and{" "}
+                <strong style={{ color: "var(--text-primary)" }}>internships</strong>, remote or on-site in Lagos, Ibadan and Ogbomoso, with
+                relocation possible. Also available for{" "} <strong style={{ color: "var(--text-primary)" }}>freelance projects.</strong>
               </p>
             </motion.div>
           </motion.div>
         </div>
       </div>
-    </section>
+    </section >
   );
 }
